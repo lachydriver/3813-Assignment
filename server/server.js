@@ -19,7 +19,7 @@ app.post("api/login", function(req, res) {
     }
 
     let data = fs.readFileSync('users.json');
-    let users = JSON.parse(data);    
+    let users = JSON.parse(data);
     
     var user = {};
 
@@ -35,7 +35,8 @@ app.post("api/login", function(req, res) {
     res.send(user)
 })
 
-
 app.use(express.static(path.join(__dirname, '../dist/Assignment')));
+
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
 
 app.listen(3000, () => {console.log(`server started on port: ${PORT}`)});
