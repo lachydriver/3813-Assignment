@@ -1,5 +1,6 @@
 {
     "users": [
-        {"username": "lachydriver", "groups": "supp"}
+        {"username": "lachydriver", "role": "supp", "groups": ["group 1", {"channels": ["channel1"]}]},
+        {"username": "test", "role": "super", "groups": ["group 1", {"channels": ["channel1", "channel2"]}]}
     ]
 }

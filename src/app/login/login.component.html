@@ -1,8 +1,9 @@
 <h3>Login Page</h3>
 <form>
-    <label>Email:</label>
-    <input type="text" name="inputEmail" id="inputEmail" [(ngModel)]="inputEmail">
+    <label>Username:</label>
+    <input type="text" name="inputUsername" id="inputUsername" [(ngModel)]="inputUsername">
     <label>Password:</label>
     <input type="text" name="password" id="password">
-    <button type="submit" (click)="submitClicked()">Submit</button>
+    <button type="submit" (click)="submitClicked()">Submit</button><br>
+    {{error}}
 </form>

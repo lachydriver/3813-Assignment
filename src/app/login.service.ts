@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 export interface User {
-  email: String;
+  username: String;
+  role: String;
   valid: boolean;
 }
 
@@ -15,8 +16,8 @@ export class LoginService {
 
   constructor(private http:HttpClient) { }
 
-  login(inputEmail: string){
-    return this.http.post<User>(this.loginurl, {inputEmail: inputEmail})
+  login(inputUsername: string){
+    return this.http.post<User>(this.loginurl, {inputUsername: inputUsername})
     
   }
 }

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  inputEmail: any;
+  inputUsername: any;
   error: any;
 
 
@@ -24,11 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   submitClicked(){
-     this.loginService.login(this.inputEmail).subscribe(data => {
+     this.loginService.login(this.inputUsername).subscribe(data => {
        if(data.valid === true){
-         this.router.navigateByUrl("/home")
+        localStorage.setItem('username', JSON.stringify(data.username));
+        localStorage.setItem('role', JSON.stringify(data.role));
+        this.router.navigateByUrl("/home")
+
        } else {
-         console.log("DATA NOT VALID")
+         this.error = "Invalid Username"
        }
      }
 
