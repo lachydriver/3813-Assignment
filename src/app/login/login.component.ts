@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { LoginService, User } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,23 +14,24 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   inputEmail: any;
-  inputPassword: any;
   error: any;
 
-  loginurl: "http://localhost:3000/api/login";
 
 
-
-  constructor(private http:HttpClient) { }
+  constructor(private loginService:LoginService, private router:Router) { }
 
   ngOnInit() {
   }
 
-  postUser(){
-    this.http.post(this.loginurl, this.inputEmail).subscribe(res => {console.log(res)},
-    (err: HttpErrorResponse) => {
-      console.log(err.error);
-    })
-  }
+  submitClicked(){
+     this.loginService.login(this.inputEmail).subscribe(data => {
+       if(data.valid === true){
+         this.router.navigateByUrl("/home")
+       } else {
+         console.log("DATA NOT VALID")
+       }
+     }
 
+     )
+     }
 }

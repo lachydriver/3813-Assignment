@@ -8,35 +8,32 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(cors());
 
-const PORT = 3000;
-
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-app.post("api/login", function(req, res) {
-    if(!req.body) {
-        return res.sendStatus(400);
-    }
-
-    let data = fs.readFileSync('users.json');
-    let users = JSON.parse(data);
-    
-    var user = {};
-
-    user.username = req.body.username;
-    user.valid = false;
-
-    for(let i=0;i<users.length;i++){
-        if(req.body.username == users[i].username){
-            user.valid = true;
-            user.role = users[i].role;
-        }
-    }
-    res.send(user)
-})
+const PORT = 3000;
 
 app.use(express.static(path.join(__dirname, '../dist/Assignment')));
 
-app.get('/*', (req, res) => res.sendFile(path.join(__dirname)));
+var useremail = "lachydriver@gmail.com"
+
+app.post("/api/login", function(req, res) {
+
+    user = {}
+
+    user.email = req.body.inputEmail;
+    user.valid = null;
+
+    if(user.email === useremail){
+        user.valid = true;
+    } else {
+        user.valid = false;
+    }
+    res.send(user)
+    console.log(user)
+
+})
+
+
 
 app.listen(3000, () => {console.log(`server started on port: ${PORT}`)});
