@@ -16,6 +16,9 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, '../dist/Assignment')));
 
 var useremail = "lachydriver@gmail.com"
+var rawdata = fs.readFileSync('users.json');
+
+var data = JSON.parse(rawdata)
 
 app.post("/api/login", function(req, res) {
 
@@ -24,11 +27,14 @@ app.post("/api/login", function(req, res) {
     user.email = req.body.inputEmail;
     user.valid = null;
 
-    if(user.email === useremail){
+    console.log(data.users[0].username)
+    for(i=0; i<data.users.length;i++){
+    if(user.email === data.users[i].username){
         user.valid = true;
     } else {
         user.valid = false;
     }
+}
     res.send(user)
     console.log(user)
 
