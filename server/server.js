@@ -29,6 +29,7 @@ app.post("/api/login", function(req, res) {
     if (user.username === data.users[i].username) {
       user.valid = true;
       user.role = data.users[i].role;
+      user.groupAdminRole = data.users[i].groupAdminRole;
       break;
     } else {
       user.valid = false;
@@ -43,9 +44,9 @@ app.post("/api/adduser", function(req, res) {
   var thisdata = JSON.parse(rawdata);
   user = {};
 
-  user.username = req.body.newUsername;
-  user.role = req.body.role;
-  user.groups = "";
+  user.username = req.body.inputUsername;
+  user.role = req.body.inputRole;
+  user.groups = [];
 
   thisdata.users.push(user);
   console.log(thisdata);

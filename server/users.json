@@ -1,1 +1,11 @@
-{"users":[{"username":"lachydriver","role":"super","groups":["group 1",{"channels":["channel1"]}]},{"username":"test","role":"user","groups":""}]}
+{
+  "users": [
+    {
+      "username": "lachydriver",
+      "role": "super",
+      "groupAdminRole": "true",
+      "groups": ["group 1", { "channels": [] }]
+    }
+  ],
+  "groups": [{"name": "Group 1", "channels":["Channel 1"]}, {"name": "Group 2", "channels":["Channel 2"]}]
+}

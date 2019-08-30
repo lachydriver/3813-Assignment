@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
        if(data.valid === true){
         localStorage.setItem('username', JSON.stringify(data.username));
         localStorage.setItem('role', JSON.stringify(data.role));
+        localStorage.setItem('groupAdminRole', JSON.stringify(data.groupAdminRole))
         this.router.navigateByUrl("/home")
 
        } else {
