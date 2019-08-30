@@ -18,6 +18,10 @@ export class ManageComponent implements OnInit {
 
   inputUsername: any;
   inputRole: any;
+  inputGroup: any;
+  inputChannel: any;
+  groupname: any;
+  groups: any;
 
   checkRole(){
     if(this.role === "super"){
@@ -38,8 +42,27 @@ export class ManageComponent implements OnInit {
     })
   }
 
+  addGroup(){
+    this.loginService.addgroup(this.groupname).subscribe(data => {
+      if(data) {
+        alert("Successfully added group: " + this.groupname);
+      }
+    })
+  }
+
+  getGroups(){
+    this.loginService.getgroup().subscribe(data => {
+      this.groups = data;
+    })
+  }
+
+  addChannel(){
+    this.loginService.addChannelToGroup(this.inputChannel, this.inputGroup).subscribe()
+  }
+
   ngOnInit() {
-    this.checkRole()
+    this.checkRole();
+    this.getGroups();
   }
 
 }

@@ -15,4 +15,20 @@
 </div>
 <div *ngIf="groupAdmin">
     <h1>Group Admin Commands:</h1>
+    <h3>Add Group:</h3>
+    <form>
+        <label>Group Name:</label>
+        <input type="text" name="groupname" [(ngModel)]="groupname">
+        <button type="submit" (click)="addGroup()">Add Group</button>
+    </form>
+    <h3>Add Channel to Group:</h3>
+    <form>
+        <label>Group:</label>
+        <select name="inputGroup" [(ngModel)]="inputGroup">
+            <option *ngFor="let group of groups">{{group.name}}</option>
+        </select>
+        <label>Channel Name:</label>
+        <input name="inputChannel" [(ngModel)]="inputChannel">
+        <button type="submit" (click)="addChannel()">Add Channel</button>
+    </form>
 </div>

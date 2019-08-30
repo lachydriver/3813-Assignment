@@ -8,6 +8,11 @@ export interface User {
   groupAdminRole: boolean;
 }
 
+export interface Group {
+  name: String;
+  channels: String;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +29,17 @@ export class LoginService {
 
   adduser(inputUsername: String, inputRole: String){
     return this.http.post<User>(this.url + "/api/adduser", {inputUsername, inputRole})
+  }
+
+  addgroup(groupname: String){
+    return this.http.post<Group>(this.url + "/api/addgroup", {groupname})
+  }
+
+  getgroup(){
+    return this.http.get<Group>(this.url + "/api/getgroups")
+  }
+
+  addChannelToGroup(){
+    return this.http.post<Group>(this.url + "/api/addchannel", {inputGroup, inputChannel})
   }
 }

@@ -1,11 +1,1 @@
-{
-  "users": [
-    {
-      "username": "lachydriver",
-      "role": "super",
-      "groupAdminRole": "true",
-      "groups": ["group 1", { "channels": [] }]
-    }
-  ],
-  "groups": [{"name": "Group 1", "channels":["Channel 1"]}, {"name": "Group 2", "channels":["Channel 2"]}]
-}
+{"users":[{"username":"lachydriver","role":"super","groupAdminRole":"true","groups":["group 1",{"channels":[]}]},{"username":"111","role":"super","groups":[]},{"username":"test","role":"groupadmin","groups":[]}],"groups":[{"name":"Group 1","channels":["Channel 1"]},{"name":"Group 2","channels":["Channel 2"]},{"name":"hey","channels":[]},{"name":"hey","channels":[]}]}
