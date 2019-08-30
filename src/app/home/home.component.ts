@@ -10,10 +10,18 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  superLoggedIn: boolean;
   email = JSON.parse(localStorage.getItem('username'))
   role = JSON.parse(localStorage.getItem('role'));
 
+  checkRole(){
+    if(this.role === "super"){
+      this.superLoggedIn = true;
+    }
+  }
+
   ngOnInit() {
+    this.checkRole()
   }
 
 }

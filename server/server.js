@@ -25,15 +25,16 @@ app.post("/api/login", function(req, res) {
   console.log(data.users[0].username);
   for (i = 0; i < data.users.length; i++) {
     console.log(data.users[i].username);
+    console.log(user.username)
     if (user.username === data.users[i].username) {
       user.valid = true;
       user.role = data.users[i].role;
+      break;
     } else {
       user.valid = false;
     }
   }
   res.send(user);
-  console.log(user);
 });
 
 app.post("/api/adduser", function(req, res) {
