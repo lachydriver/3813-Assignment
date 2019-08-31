@@ -42,4 +42,8 @@ export class LoginService {
   addChannelToGroup(inputGroup: String, inputChannel: String){
     return this.http.post<Group>(this.url + "/api/addchannel", {inputGroup, inputChannel})
   }
+
+  addUserToChannel(inputGroup: String, inputChannel: String, inputUsername){
+    return this.http.post<User>(this.url + "/api/addusertochannel", {inputGroup, inputChannel, inputUsername})
+  }
 }

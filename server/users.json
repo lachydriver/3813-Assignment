@@ -1,1 +1,19 @@
-{"users":[{"username":"lachydriver","role":"super","groupAdminRole":"true","groups":["group 1",{"channels":[]}]},{"username":"111","role":"super","groups":[]},{"username":"test","role":"groupadmin","groups":[]},{"username":"new user","role":"user","groups":[]}],"groups":[{"name":"Group 1","channels":["Channel 1","New Channel","New Channel1","New Channel1","test"]},{"name":"Group 2","channels":["Channel 2"]}]}
+{
+  "users": [
+    {
+      "username": "lachydriver",
+      "role": "super",
+      "groupAdminRole": "true",
+      "groups": [
+        {
+          "name": "Group 1",
+          "channels": ["Channel 1", "Channel 2", "Channel 12", "please woe"]
+        }
+      ]
+    }
+  ],
+  "groups": [
+    { "name": "Group 1", "channels": ["Channel 1", "Channel 2", "test"] },
+    { "name": "Group 2", "channels": ["Channel 2", "new"] }
+  ]
+}

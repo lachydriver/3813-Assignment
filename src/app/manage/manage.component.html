@@ -25,10 +25,25 @@
     <form>
         <label>Group:</label>
         <select name="inputGroup" [(ngModel)]="inputGroup">
-            <option *ngFor="let group of groups" value="Group 1">{{group.name}}</option>
+            <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
         </select>
         <label>Channel Name:</label>
         <input name="inputChannel" [(ngModel)]="inputChannel">
         <button type="submit" (click)="addChannel()">Add Channel</button>
+    </form>
+    <h3>Invite User to Group:</h3>
+    <form>
+        <label>Group:</label>
+        <select name="inviteInputGroup" [(ngModel)]="inviteInputGroup" (ngModelChange)="channelOptions()">
+            <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
+        </select>
+        <label>Channel:</label>
+        <select name="inviteInputChannel"  [(ngModel)]="inviteInputChannel">
+            <option *ngFor="let channel of selectedGroupChannels" [value]="channel">{{channel}}</option>
+        </select>
+        <label>Username:</label>
+        <select>
+            <option></option>
+        </select>
     </form>
 </div>

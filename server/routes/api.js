@@ -100,4 +100,70 @@ module.exports = function(app){
         console.log(data)
         res.send(data);
       });
+
+      app.get("/api/getusergroups", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        username = req.body.username
+
+        for(i= 0; i < data.users.length; i++){
+          if(username === data.users[i].username){
+            userdata = data.users[i]
+          } else {
+            res.send(false);
+          }
+        }
+        res.send(userdata)
+      })
+
+      app.post("/api/addusertochannel", function(req, res) {
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        usergroups = [];
+
+        username = req.body.username;
+        group = req.body.group;
+        channel = req.body.channel;
+
+        for(i = 0; i < data.users.length; i++){
+          if(username === data.users[i].username) {
+            for(y = 0; y < data.users[i].groups.length; y++){
+              if(group === data.users[i].groups[y].name){
+                usergroups = data.users[i].groups[y].channels
+                console.log("USER GROUPS:" + usergroups)
+                addChannel();
+                data.users[i].groups[y].channels = usergroups
+                console.log(data.users[i].groups[0])
+                saveFile();
+              }
+            }
+          }
+          else {
+            res.send(false);
+          }
+        }
+
+        function addChannel(){
+          console.log(usergroups)
+          if(usergroups.indexOf(channel) === -1){
+            console.log("Channel not found!")
+            console.log(channel)
+            usergroups.push(channel)
+            console.log("NEW USERGROUPS:" + usergroups)
+          }
+        }
+
+        function saveFile(){
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+      }
+        res.send(data)
+      })
+      
 }

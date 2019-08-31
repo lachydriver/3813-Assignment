@@ -22,6 +22,9 @@ export class ManageComponent implements OnInit {
   inputChannel: any;
   groupname: any;
   groups: any;
+  inviteInputGroup: any;
+  inviteInputChannel: any;
+  selectedGroupChannels: []
 
   checkRole(){
     if(this.role === "super"){
@@ -62,6 +65,15 @@ export class ManageComponent implements OnInit {
         alert("Successfully added channel " + this.inputChannel + " in group " + this.inputGroup)
       }
     })
+  }
+
+  channelOptions(){
+    for(let i in this.groups){
+      if(this.inviteInputGroup === this.groups[i].name){
+        this.selectedGroupChannels = this.groups[i].channels
+        console.log(this.selectedGroupChannels)
+      }
+    }
   }
 
   ngOnInit() {
