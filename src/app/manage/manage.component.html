@@ -34,11 +34,11 @@
     <h3>Invite User to Group:</h3>
     <form>
         <label>Group:</label>
-        <select name="inviteInputGroup" [(ngModel)]="inviteInputGroup" (ngModelChange)="channelOptions()">
+        <select name="inviteGroup" [(ngModel)]="inviteGroup" (ngModelChange)="channelOptions()">
             <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
         </select>
         <label>Channel:</label>
-        <select name="inviteInputChannel"  [(ngModel)]="inviteInputChannel">
+        <select name="inviteChannel"  [(ngModel)]="inviteChannel">
             <option *ngFor="let channel of selectedGroupChannels" [value]="channel">{{channel}}</option>
         </select>
         <label>Username:</label>
@@ -47,4 +47,5 @@
         </select>
         <button type="submit" (click)="inviteUser()">Invite User</button>
     </form>
+    <p>{{inviteError}}</p>
 </div>

@@ -22,11 +22,12 @@ export class ManageComponent implements OnInit {
   inputChannel: any;
   groupname: any;
   groups: any;
-  inviteInputGroup: any;
-  inviteInputChannel: any;
+  inviteGroup: any;
+  inviteChannel: any;
   inviteUsername: any;
   selectedGroupChannels: [];
   userdata: any;
+  inviteError: any;
 
   checkRole(){
     if(this.role === "super"){
@@ -58,7 +59,7 @@ export class ManageComponent implements OnInit {
   getGroups(){
     this.loginService.getgroup().subscribe(data => {
       this.groups = data;
-    })
+    });
   }
 
   getUsers(){
@@ -71,13 +72,25 @@ export class ManageComponent implements OnInit {
     this.loginService.addChannelToGroup(this.inputGroup, this.inputChannel).subscribe(data => {
       if(data) {
         alert("Successfully added channel " + this.inputChannel + " in group " + this.inputGroup)
+        this.getGroups();
+      }
+    })
+    
+  }
+  
+  inviteUser(){
+    this.loginService.addUserToChannel(this.inviteGroup, this.inviteChannel, this.inviteUsername).subscribe(data => {
+      if(data === false) {
+        this.inviteError = "This user is already in this channel"
+      } else if (data === true){
+        this.inviteError = "Added user to channel"
       }
     })
   }
 
   channelOptions(){
     for(let i in this.groups){
-      if(this.inviteInputGroup === this.groups[i].name){
+      if(this.inviteGroup === this.groups[i].name){
         this.selectedGroupChannels = this.groups[i].channels
         console.log(this.selectedGroupChannels)
       }
@@ -88,6 +101,10 @@ export class ManageComponent implements OnInit {
     this.checkRole();
     this.getGroups();
     this.getUsers();
+  }
+
+  ngOnChanges() {
+    this.getGroups();
   }
 
 }

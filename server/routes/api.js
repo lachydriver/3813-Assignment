@@ -134,9 +134,10 @@ module.exports = function(app){
 
         usergroups = [];
 
-        username = req.body.username;
-        group = req.body.group;
-        channel = req.body.channel;
+        username = req.body.inviteUsername;
+        group = req.body.inviteGroup;
+        channel = req.body.inviteChannel;
+        valid = false;
 
         for(i = 0; i < data.users.length; i++){
           if(username === data.users[i].username) {
@@ -151,9 +152,6 @@ module.exports = function(app){
               }
             }
           }
-          else {
-            res.send(false);
-          }
         }
 
         function addChannel(){
@@ -163,6 +161,7 @@ module.exports = function(app){
             console.log(channel)
             usergroups.push(channel)
             console.log("NEW USERGROUPS:" + usergroups)
+            valid = true;
           }
         }
 
@@ -174,7 +173,7 @@ module.exports = function(app){
           }
         })
       }
-        res.send(data)
+        res.send(valid)
       })
       
 }
