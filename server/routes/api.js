@@ -128,6 +128,83 @@ module.exports = function(app){
         res.send(userlist)        
       })
 
+      app.post("/api/addgrouptouser", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        newgroup = {};
+        newgroup.name = req.body.inviteGroupName;
+        newgroup.channels = [];
+        username = req.body.inviteGroupUsername;
+
+
+        for(i = 0; i < data.users.length; i++){
+          if(username === data.users[i].username){
+            console.log("MATCHED USERNAME")
+            data.users[i].groups.push(newgroup);
+          }
+        }
+        var newdata = JSON.stringify(data);
+      fs.writeFile("users.json", newdata, function(err) {
+        if (err) {
+          console.log(err);
+        }
+      })
+      res.send(data)
+      });
+
+      
+      app.post("/api/deleteuser", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        user = req.body.deleteUser;
+
+        for(i = 0; i < data.users.length; i++){
+          if(user === data.users[i].username){
+            data.users.splice(i, 1);
+          }
+        }
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        res.send(data);
+      });
+
+      app.post("/api/deletegroup", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        group = req.body.deleteGroupName;
+
+        for(i = 0; i < data.groups.length; i++){
+          if(group === data.groups[i].name){
+            data.groups.splice(i, 1)
+            deleteFromUser()
+          }
+        }
+
+        function deleteFromUser(){
+          for(i = 0; i < data.users.length; i++){
+            for(x = 0; x < data.users[i].groups.length; x++){
+              if(group === data.users[i].groups[x].name){
+                data.users[i].groups.splice(x, 1);
+              }
+            }
+          }
+        }
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        res.send(true)
+      })
+
       app.post("/api/addusertochannel", function(req, res) {
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);

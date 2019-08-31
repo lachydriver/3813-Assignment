@@ -37,6 +37,18 @@
         <select name="inviteGroup" [(ngModel)]="inviteGroup" (ngModelChange)="channelOptions()">
             <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
         </select>
+        <label>Username:</label>
+        <select name="inviteUsername" [(ngModel)]="inviteUsername">
+            <option *ngFor="let user of userdata" [value]="user">{{user}}</option>
+        </select>
+        <button type="submit" (click)="inviteUser()">Invite User</button>
+    </form>
+    <h3>Invite User to Channel:</h3>
+    <form>
+        <label>Group:</label>
+        <select name="inviteGroup" [(ngModel)]="inviteGroup" (ngModelChange)="channelOptions()">
+            <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
+        </select>
         <label>Channel:</label>
         <select name="inviteChannel"  [(ngModel)]="inviteChannel">
             <option *ngFor="let channel of selectedGroupChannels" [value]="channel">{{channel}}</option>

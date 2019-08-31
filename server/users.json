@@ -4,21 +4,7 @@
       "username": "lachydriver",
       "role": "super",
       "groupAdminRole": "true",
-      "groups": [
-        { "name": "Group 1", "channels": [] },
-        { "name": "Group 2", "channels": ["hey there"] }
-      ]
-    },
-    {
-      "username": "testuser",
-      "role": "super",
-      "groupAdminRole": "true",
-      "groups": [
-        {
-          "name": "Group 1",
-          "channels": ["Channel 1", "Channel 2", "Channel 12", "please woe"]
-        }
-      ]
+      "groups": [{ "name": "CS:GO", "channels": ["Matchmaking"] }]
     }
   ],
   "groups": [
@@ -35,8 +21,6 @@
         "new!!",
         "new!!!!!"
       ]
-    },
-    { "name": "Group 2", "channels": ["Channel 2", "new", "hey there"] },
-    { "name": "CS:GO", "channels": ["Matchmaking"] }
+    }
   ]
 }
