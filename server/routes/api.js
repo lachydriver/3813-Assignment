@@ -183,10 +183,24 @@ module.exports = function(app){
 
         for(i = 0; i < data.groups.length; i++){
           if(group === data.groups[i].name){
-            console.log(data.groups[i].channels.length)
             for(y = 0; y < data.groups[i].channels.length; y++){
               if(channel === data.groups[i].channels[y]){
-                data.groups[i].channels.splice(y, 1)
+                data.groups[i].channels.splice(y, 1);
+                deleteChannelFromUser();
+              }
+            }
+          }
+        }
+
+        function deleteChannelFromUser(){
+          for(i = 0; i < data.users.length; i++){
+            for(x = 0; x < data.users[i].groups.length; x++){
+              if(group === data.users[i].groups[x].name){
+                for(y = 0; y < data.users[i].groups[x].channels.length; y++){
+                  if(channel === data.users[i].groups[x].channels[y]){
+                    data.users[i].groups[x].channels.splice(y, 1);
+                  }
+                }
               }
             }
           }
@@ -197,7 +211,7 @@ module.exports = function(app){
             console.log(err);
           }
         })
-        res.send(true)
+        res.send(data)
       })
 
       app.post("/api/deletegroup", function(req, res){

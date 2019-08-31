@@ -4,8 +4,26 @@
       "username": "lachydriver",
       "role": "super",
       "groupAdminRole": "true",
-      "groups": [{ "name": "CS:GO", "channels": ["Matchmaking"] }]
+      "groups": [
+        { "name": "Group 1", "channels": ["hey there"] },
+        { "name": "CS:GO", "channels": ["Matchmaking"] }
+      ]
     }
   ],
-  "groups": [{ "name": "Group 1", "channels": ["Channel 2"] }]
+  "groups": [
+    {
+      "name": "Group 1",
+      "channels": [
+        "Channel 2",
+        "test",
+        "this is a new channel",
+        "new grouppp",
+        "aw yeah",
+        "hey!!",
+        "new!!",
+        "new!!!!!"
+      ]
+    },
+    { "name": "Group 2", "channels": ["Channel 2", "new", "hey there"] }
+  ]
 }
