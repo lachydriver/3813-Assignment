@@ -115,6 +115,17 @@ module.exports = function(app){
           }
         }
         res.send(userdata)
+      });
+
+      app.get("/api/getusers", function(req, res) {
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+        userdata = data.users
+        userlist = [];
+        for(i = 0; i < userdata.length; i++){
+          userlist.push(userdata[i].username)
+        }
+        res.send(userlist)        
       })
 
       app.post("/api/addusertochannel", function(req, res) {

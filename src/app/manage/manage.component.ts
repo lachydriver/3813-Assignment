@@ -24,7 +24,9 @@ export class ManageComponent implements OnInit {
   groups: any;
   inviteInputGroup: any;
   inviteInputChannel: any;
-  selectedGroupChannels: []
+  inviteUsername: any;
+  selectedGroupChannels: [];
+  userdata: any;
 
   checkRole(){
     if(this.role === "super"){
@@ -59,6 +61,12 @@ export class ManageComponent implements OnInit {
     })
   }
 
+  getUsers(){
+    this.loginService.getusers().subscribe(data => {
+      this.userdata = data;
+    })
+  }
+
   addChannel(){
     this.loginService.addChannelToGroup(this.inputGroup, this.inputChannel).subscribe(data => {
       if(data) {
@@ -79,6 +87,7 @@ export class ManageComponent implements OnInit {
   ngOnInit() {
     this.checkRole();
     this.getGroups();
+    this.getUsers();
   }
 
 }

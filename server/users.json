@@ -10,7 +10,18 @@
           "channels": ["Channel 1", "Channel 2", "Channel 12", "please woe"]
         }
       ]
-    }
+    },
+    {
+        "username": "testuser",
+        "role": "super",
+        "groupAdminRole": "true",
+        "groups": [
+          {
+            "name": "Group 1",
+            "channels": ["Channel 1", "Channel 2", "Channel 12", "please woe"]
+          }
+        ]
+      }
   ],
   "groups": [
     { "name": "Group 1", "channels": ["Channel 1", "Channel 2", "test"] },

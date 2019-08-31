@@ -42,8 +42,9 @@
             <option *ngFor="let channel of selectedGroupChannels" [value]="channel">{{channel}}</option>
         </select>
         <label>Username:</label>
-        <select>
-            <option></option>
+        <select name="inviteUsername" [(ngModel)]="inviteUsername">
+            <option *ngFor="let user of userdata" [value]="user">{{user}}</option>
         </select>
+        <button type="submit" (click)="inviteUser()">Invite User</button>
     </form>
 </div>
