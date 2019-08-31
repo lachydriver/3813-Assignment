@@ -39,7 +39,7 @@ export class LoginService {
     return this.http.get<Group>(this.url + "/api/getgroups")
   }
 
-  addChannelToGroup(){
+  addChannelToGroup(inputGroup: String, inputChannel: String){
     return this.http.post<Group>(this.url + "/api/addchannel", {inputGroup, inputChannel})
   }
 }

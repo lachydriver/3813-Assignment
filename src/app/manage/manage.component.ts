@@ -57,7 +57,11 @@ export class ManageComponent implements OnInit {
   }
 
   addChannel(){
-    this.loginService.addChannelToGroup(this.inputChannel, this.inputGroup).subscribe()
+    this.loginService.addChannelToGroup(this.inputGroup, this.inputChannel).subscribe(data => {
+      if(data) {
+        alert("Successfully added channel " + this.inputChannel + " in group " + this.inputGroup)
+      }
+    })
   }
 
   ngOnInit() {

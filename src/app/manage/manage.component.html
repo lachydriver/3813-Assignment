@@ -25,7 +25,7 @@
     <form>
         <label>Group:</label>
         <select name="inputGroup" [(ngModel)]="inputGroup">
-            <option *ngFor="let group of groups">{{group.name}}</option>
+            <option *ngFor="let group of groups" value="Group 1">{{group.name}}</option>
         </select>
         <label>Channel Name:</label>
         <input name="inputChannel" [(ngModel)]="inputChannel">

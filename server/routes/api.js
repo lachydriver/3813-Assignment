@@ -65,8 +65,31 @@ module.exports = function(app){
         })
       });
 
-      app.post("api/addchannel", function(req, res) {
+      app.post("/api/addchannel", function(req, res) {
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        groupname = req.body.inputGroup;
+        channelname = req.body.inputChannel;
+
+        console.log(groupname + channelname)
         
+
+        for(i=0; i < data.groups.length; i++){
+          console.log(data.groups[i].name + " " + groupname)
+          if(groupname === data.groups[i].name){
+            console.log(data.groups[i].name)
+            data.groups[i].channels.push(channelname)
+          }
+        }
+        console.log(data.groups)
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        res.send(data)
       })
 
       app.get("/api/getgroups", function(req, res) {
