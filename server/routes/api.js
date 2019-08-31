@@ -174,6 +174,32 @@ module.exports = function(app){
         res.send(data);
       });
 
+      app.post("/api/deletechannel", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        channel = req.body.deleteChannel;
+        group = req.body.deleteChannelGroup;
+
+        for(i = 0; i < data.groups.length; i++){
+          if(group === data.groups[i].name){
+            console.log(data.groups[i].channels.length)
+            for(y = 0; y < data.groups[i].channels.length; y++){
+              if(channel === data.groups[i].channels[y]){
+                data.groups[i].channels.splice(y, 1)
+              }
+            }
+          }
+        }
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        res.send(true)
+      })
+
       app.post("/api/deletegroup", function(req, res){
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);

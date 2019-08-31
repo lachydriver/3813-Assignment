@@ -7,20 +7,5 @@
       "groups": [{ "name": "CS:GO", "channels": ["Matchmaking"] }]
     }
   ],
-  "groups": [
-    {
-      "name": "Group 1",
-      "channels": [
-        "Channel 1",
-        "Channel 2",
-        "test",
-        "this is a new channel",
-        "new grouppp",
-        "aw yeah",
-        "hey!!",
-        "new!!",
-        "new!!!!!"
-      ]
-    }
-  ]
+  "groups": [{ "name": "Group 1", "channels": ["Channel 2"] }]
 }
