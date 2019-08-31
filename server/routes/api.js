@@ -174,6 +174,36 @@ module.exports = function(app){
         res.send(data);
       });
 
+      app.post("/api/removeuserfromchannel", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        user = req.body.deleteChannelUser;
+        group = req.body.deleteGroupChannelUser;
+        channel = req.body.removeChannelFromUser;
+
+        for(i = 0; i < data.users.length; i++){
+          if(user === data.users[i].username){
+          for(x = 0; x < data.users[i].groups.length; x++){
+            if(group === data.users[i].groups[x].name){
+              for(y = 0; y < data.users[i].groups[x].channels.length; y++){
+                if(channel === data.users[i].groups[x].channels[y]){
+                  data.users[i].groups[x].channels.splice(y, 1);
+                }
+              }
+            }
+          }
+          }
+        }
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+        res.send(data)
+      })
+
       app.post("/api/deletechannel", function(req, res){
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);

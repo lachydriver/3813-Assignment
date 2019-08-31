@@ -5,7 +5,7 @@
       "role": "super",
       "groupAdminRole": "true",
       "groups": [
-        { "name": "Group 1", "channels": ["hey there"] },
+        { "name": "Group 1", "channels": [] },
         { "name": "CS:GO", "channels": ["Matchmaking"] }
       ]
     }
