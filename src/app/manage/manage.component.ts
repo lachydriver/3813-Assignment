@@ -168,6 +168,12 @@ export class ManageComponent implements OnInit {
     console.log(this.removeChannelNamePossibilities)
   }
 
+  deleteChannelfromUser(){
+    this.loginService.deleteChannelfromUser(this.removeChannelUserName, this.removeChannelGroupName, this.removeChannelfromUser).subscribe(data => {
+      this.ngOnInit();
+    })
+  }
+
   inviteUserToGroup(){
     this.loginService.addUserToGroup(this.inviteGroupName, this.inviteGroupUsername).subscribe(data =>
       {

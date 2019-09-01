@@ -185,8 +185,8 @@ module.exports = function(app){
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);
 
-        user = req.body.deleteChannelUser;
-        group = req.body.deleteGroupChannelUser;
+        user = req.body.removeChannelUserName;
+        group = req.body.removeChannelGroupName;
         channel = req.body.removeChannelFromUser;
 
         for(i = 0; i < data.users.length; i++){

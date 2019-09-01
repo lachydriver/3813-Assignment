@@ -70,4 +70,8 @@ export class LoginService {
   getAssisUsers(){
     return this.http.get(this.url + "/api/getgroupassis")
   }
+
+  deleteChannelfromUser(removeChannelUserName: String, removeChannelGroupName: String, removeChannelFromUser: String){
+    return this.http.post(this.url + "/api/removeuserfromchannel", {removeChannelUserName, removeChannelGroupName, removeChannelFromUser})
+  }
 }
