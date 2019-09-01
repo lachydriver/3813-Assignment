@@ -10,7 +10,7 @@
     { "username": "group Admin", "role": "groupadmin", "groups": [] }
   ],
   "groups": [
-    { "name": "New Group 1", "channels": ["first channel"], "group_assis": [] },
+    { "name": "New Group 1", "channels": ["first channel"], "group_assis": ["lachydriver"] },
     { "name": "this is a new group", "channels": [], "group_assis": ["lachydriver"] }
   ]
 }

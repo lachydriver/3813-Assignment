@@ -342,21 +342,25 @@ module.exports = function(app){
         var data = JSON.parse(rawdata);
 
         groupassis = {};
+        groups = [];
 
         for(i = 0; i < data.users.length; i++){
           for(y = 0; y < data.groups.length; y++){
             for(x = 0; x < data.groups[y].group_assis.length; x++){
               if(data.users[i].username === data.groups[y].group_assis[x]){
-                group = [];
+                group = {};
                 group.name = data.groups[y].name
                 group.assisuser = [];
                 group.assisuser.push(data.groups[y].group_assis[x])
-                console.log(group)
+                groups.push(group)
+              
               }
             }
           }
         }
-        res.send(true)
+        console.log(groups)
+        groupassis['assisusers'] = groups
+        res.send(groupassis)
       })
       
 }

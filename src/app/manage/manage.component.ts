@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
+import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 
 @Component({
   selector: 'app-manage',
@@ -12,7 +13,7 @@ export class ManageComponent implements OnInit {
 
   superLoggedIn: boolean;
   groupAdmin: boolean;
-  email = JSON.parse(localStorage.getItem('username'))
+  username = JSON.parse(localStorage.getItem('username'))
   role = JSON.parse(localStorage.getItem('role'));
 
   inputUsername: any;
@@ -36,6 +37,9 @@ export class ManageComponent implements OnInit {
   deleteChannelGroupName: any;
   deleteChannelName: any;
   deleteSelectedGroupChannels: [];
+  assisUserList: any;
+  isAssisUser: any;
+  userAssisGroups: Array<String> = [];
 
   checkRole(){
     if(this.role === "super"){
@@ -146,10 +150,30 @@ export class ManageComponent implements OnInit {
     });
   }
 
+  getAssisUsers(){
+    this.loginService.getAssisUsers().subscribe(data => {
+      this.assisUserList = data;
+      for(var i = 0; i < this.assisUserList.assisusers.length; i++){
+        for(var y = 0; y < this.assisUserList.assisusers[i].assisuser.length; y++){
+          if(this.username === this.assisUserList.assisusers[i].assisuser[y]){
+            this.isAssisUser = true;
+            this.userAssisGroups.push(this.assisUserList.assisusers[i].name)
+          }
+        }
+      }
+    })
+  }
+
+  getAssisGroups(){
+
+  }
+
   ngOnInit() {
     this.checkRole();
     this.getGroups();
     this.getUsers();
+    this.getAssisUsers();
+    console.log(this.userAssisGroups)
   }
 
   ngOnChanges() {
