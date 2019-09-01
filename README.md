@@ -1,27 +1,25 @@
-# Assignment
+# 3813 ICT Chat Application Assignment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
+Welcome to my chat application assignment for 3813ICT at Griffith University.
 
-## Development server
+This git repository was used throughout the development of this chat application. The main purposes of this was to keep track of my changes, and if I commit any issues, I can instantly roll back to a previous version that was working.
+It also lets me keep track of each commit, and when each feature was developed and added.
+This repository also allows for easy sharing with my assessor for the course.
+The repository is organised with the root directory of the angular app, excluding node_modules to keep the size low, therefore ```npm install``` must be run to run the project locally.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Data
+The data that both the server and angular app use varies with data types. The server side stores all of the information in a single JSON file. This json object includes both the user object and the groups. The JSON file is read by each route when required, and information is stored within the route using an array or an object. This is then appended to the copy of the JSON file within the route, and then the copy of the data (with the new data) back to the JSON file using the save function.
 
-## Code scaffolding
+The angular app uses many variables, to store the currently chosen user, group, or channel. There are also array's that are used to populate the dropdown menu's (returned from the server upon the component loading).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Angular Architecture
+The Angular app is split into components, services, and interfaces. Each page consists of its own component, which includes data requested from the server (especially in the manage page). The service stores the functions to make the http post requests to the server to get/post data. Storing these functions in the service allows any component to access these functions, instead of making the request in the component (limiting it to the component). Finally, the routes are used to determine what component shows on the page (login page, home page, and the manage page).
 
-## Build
+# Node Server
+The node server is split up into mainly two files. The server.js file requires the file that stores the routes, and starts the express server that listens on a certain port. The route file exports the routes that are accessed from the Angular app. The routes file contains functions such as post and get functions for the Angular app to send and receive data from through HTTP requests.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# DIVIDING RESPONSIBILITIES
 
-## Running unit tests
+# LIST OF ROUTES
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Details of Interaction
