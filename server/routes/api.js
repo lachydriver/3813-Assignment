@@ -162,7 +162,7 @@ module.exports = function(app){
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);
 
-        user = req.body.deleteUser;
+        user = req.body.deleteUserName;
 
         for(i = 0; i < data.users.length; i++){
           if(user === data.users[i].username){
@@ -175,7 +175,7 @@ module.exports = function(app){
             console.log(err);
           }
         })
-        res.send(data);
+        res.send(true);
       });
 
       app.post("/api/removeuserfromchannel", function(req, res){

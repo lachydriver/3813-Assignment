@@ -31,6 +31,7 @@ export class ManageComponent implements OnInit {
   userdata: any;
   alluserdata: any;
   inviteError: any;
+  deleteUserName: any;
 
   checkRole(){
     if(this.role === "super"){
@@ -48,6 +49,7 @@ export class ManageComponent implements OnInit {
       } else {
         alert("There was an error adding the user")
       }
+      this.ngOnInit();
     })
   }
 
@@ -74,11 +76,21 @@ export class ManageComponent implements OnInit {
   addChannel(){
     this.loginService.addChannelToGroup(this.inputGroup, this.inputChannel).subscribe(data => {
       if(data) {
+        this.ngOnInit();
         alert("Successfully added channel " + this.inputChannel + " in group " + this.inputGroup)
-        this.getGroups();
+        
       }
     })
     
+  }
+
+  deleteUser(){
+    this.loginService.removeUser(this.deleteUserName).subscribe(data => {
+      if(data === true) {
+        alert("User deleted successfully")
+        this.ngOnInit();
+      }
+    })
   }
   
   inviteUser(){
@@ -88,6 +100,7 @@ export class ManageComponent implements OnInit {
       } else if (data === true){
         this.inviteError = "Added user to channel"
       }
+      this.ngOnInit()
     })
   }
 
@@ -104,7 +117,8 @@ export class ManageComponent implements OnInit {
     this.loginService.addUserToGroup(this.inviteGroupName, this.inviteGroupUsername).subscribe(data =>
       {
         console.log(data)
-    })
+        this.ngOnInit()
+    });
   }
 
   ngOnInit() {

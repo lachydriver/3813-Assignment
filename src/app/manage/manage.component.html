@@ -1,6 +1,6 @@
 <div class="container is-fluid managecontainer">
 <div *ngIf="superLoggedIn">
-<h1>Super Admin Commands:</h1>
+<h3 class="title">Super Admin Commands:</h3>
 <h3>Add User:</h3>
 <form>
     <label>Username:</label>
@@ -13,9 +13,17 @@
     </select>
     <button type="submit" (click)="addUser()">Add User</button>
 </form>
+<h3>Delete User:</h3>
+<form>
+        <label>Username:</label>
+        <select type="text" name="deleteUserName" [(ngModel)]="deleteUserName">
+            <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
+        </select>
+        <button type="submit" (click)="deleteUser()">Delete User</button>
+    </form>
 </div>
 <div *ngIf="groupAdmin">
-    <h1>Group Admin Commands:</h1>
+    <h3 class="title">Group Admin Commands:</h3>
     <h3>Add Group:</h3>
     <form>
         <label>Group Name:</label>
@@ -63,12 +71,31 @@
     <p>{{inviteError}}</p>
     <div class="userinfo">
         <h3 class="title">Users:</h3>
-        <div class="user" *ngFor="let user of userdata">
-            {{user.username}}
-            <p *ngFor="let group of user.groups">{{group.name}} {{group.channels}}</p>
-            
-            Groups: 
-        </div>
+        <table class="table is-bordered">
+            <tr>
+                <td>Username</td>
+                <td>Groups/Channels</td>
+            </tr>
+            <tr *ngFor="let user of userdata">
+                <td>{{user.username}}<br>
+                Role: {{user.role}}</td>
+                <td><p *ngFor="let group of user.groups"><b>{{group.name}}</b><br>
+                    Channels: <br>{{group.channels}}</td>
+            </tr>
+    </table>
     </div>
+    <div class="groupinfo">
+            <h3 class="title">Groups:</h3>
+            <table class="table is-bordered">
+                <tr>
+                    <td>Group</td>
+                    <td>Channels</td>
+                </tr>
+                <tr *ngFor="let group of groups">
+                    <td>{{group.name}}<br>
+                    <td><p *ngFor="let channel of group.channels">{{channel}}<br></td>
+                </tr>
+        </table>
+        </div>
 </div>
 </div>

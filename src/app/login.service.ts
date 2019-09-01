@@ -54,4 +54,8 @@ export class LoginService {
   addUserToGroup( inviteGroupName: String, inviteGroupUsername: String){
     return this.http.post<User>(this.url + "/api/addgrouptouser", {inviteGroupName, inviteGroupUsername})
   }
+
+  removeUser(deleteUserName: String){
+    return this.http.post(this.url + "/api/deleteuser", {deleteUserName})
+  }
 }
