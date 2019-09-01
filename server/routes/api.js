@@ -70,10 +70,7 @@ module.exports = function(app){
         var data = JSON.parse(rawdata);
 
         groupname = req.body.inputGroup;
-        channelname = req.body.inputChannel;
-
-        console.log(groupname + channelname)
-        
+        channelname = req.body.inputChannel;     
 
         for(i=0; i < data.groups.length; i++){
           console.log(data.groups[i].name + " " + groupname)

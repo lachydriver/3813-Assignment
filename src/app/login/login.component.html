@@ -1,9 +1,11 @@
-<h3>Login Page</h3>
+<div class="logincontainer">
+<h1 class="title">Login</h1><br>
+<div class="loginform">
 <form>
-    <label>Username:</label>
-    <input type="text" name="inputUsername" id="inputUsername" [(ngModel)]="inputUsername">
-    <label>Password:</label>
-    <input type="text" name="password" id="password">
-    <button type="submit" (click)="submitClicked()">Submit</button><br>
+    <input type="text" name="inputUsername" id="inputUsername" [(ngModel)]="inputUsername" class="input is-info" placeholder="Username"><br><br>
+    <input type="password" name="password" id="password" class="input is-info" placeholder="Password"><br><br>
+    <button type="submit" (click)="submitClicked()" class="button is-dark">Submit</button><br>
     {{error}}
 </form>
+</div>
+</div>

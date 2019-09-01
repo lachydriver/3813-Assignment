@@ -1,6 +1,8 @@
+<div class="container homecontainer">
 <p>Welcome {{email}}</p>
 <p>Your role: {{role}}</p>
 <div *ngIf="superLoggedIn">
     <h1>Super Commands:</h1>
     <button routerLink="/manage">Manage</button>
+</div>
 </div>

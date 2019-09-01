@@ -15,13 +15,7 @@
       "name": "Group 1",
       "channels": [
         "Channel 2",
-        "test",
-        "this is a new channel",
-        "new grouppp",
-        "aw yeah",
-        "hey!!",
-        "new!!",
-        "new!!!!!"
+        "test"
       ]
     },
     { "name": "Group 2", "channels": ["Channel 2", "new", "hey there"] }
