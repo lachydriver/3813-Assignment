@@ -14,10 +14,10 @@ export class ManageComponent implements OnInit {
   groupAdmin: boolean;
   email = JSON.parse(localStorage.getItem('username'))
   role = JSON.parse(localStorage.getItem('role'));
-  groupAdminRole = JSON.parse(localStorage.getItem('groupAdminRole'));
 
   inputUsername: any;
   inputRole: any;
+  inputEmail: any;
   inputGroup: any;
   inputChannel: any;
   groupname: any;
@@ -36,14 +36,14 @@ export class ManageComponent implements OnInit {
   checkRole(){
     if(this.role === "super"){
       this.superLoggedIn = true;
-    }
-    if(this.groupAdminRole === "true"){
+      this.groupAdmin = true;
+    } else if(this.role === "groupadmin"){
       this.groupAdmin = true;
     }
   }
 
   addUser(){
-    this.loginService.adduser(this.inputUsername, this.inputRole).subscribe(data => {
+    this.loginService.adduser(this.inputUsername, this.inputRole, this.inputEmail).subscribe(data => {
       if(data){
         alert("Successfully added user: " + this.inputUsername);
       } else {

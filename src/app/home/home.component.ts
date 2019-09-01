@@ -10,13 +10,13 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  superLoggedIn: boolean;
+  manageLoggedIn: boolean;
   email = JSON.parse(localStorage.getItem('username'))
   role = JSON.parse(localStorage.getItem('role'));
 
   checkRole(){
-    if(this.role === "super"){
-      this.superLoggedIn = true;
+    if(this.role === "super" || this.role === "groupadmin"){
+      this.manageLoggedIn = true;
     }
   }
 

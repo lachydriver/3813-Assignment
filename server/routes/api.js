@@ -33,6 +33,7 @@ module.exports = function(app){
       
         user.username = req.body.inputUsername;
         user.role = req.body.inputRole;
+        user.email = req.body.inputEmail;
         user.groups = [];
       
         thisdata.users.push(user);

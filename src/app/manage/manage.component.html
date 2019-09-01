@@ -5,6 +5,8 @@
 <form>
     <label>Username:</label>
     <input type="text" name="inputUsername" [(ngModel)]="inputUsername">
+    <label>Email:</label>
+    <input type="text" name="inputEmail" [(ngModel)]="inputEmail">
     <label>Role:</label>
     <select name="inputRole" [(ngModel)]="inputRole">
         <option value="super">Super</option>
@@ -77,7 +79,8 @@
                 <td>Groups/Channels</td>
             </tr>
             <tr *ngFor="let user of userdata">
-                <td>{{user.username}}<br>
+                <td><b>{{user.username}}</b><br>
+                Email: {{user.email}}<br>
                 Role: {{user.role}}</td>
                 <td><p *ngFor="let group of user.groups"><b>{{group.name}}</b><br>
                     Channels: <br>{{group.channels}}</td>
