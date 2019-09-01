@@ -76,7 +76,6 @@
         <select name="deleteGroupName" [(ngModel)]="deleteGroupName">
             <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
         </select>
-        <label>Channel:</label>
         <button type="submit" (click)="deleteGroup()">Delete Group</button>
     </form>
     <h3>Remove Channel:</h3>

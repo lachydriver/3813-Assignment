@@ -106,6 +106,7 @@ export class ManageComponent implements OnInit {
 
   deleteChannel(){
     this.loginService.deleteChannel(this.deleteChannelGroupName, this.deleteChannelName).subscribe(data => {
+      this.selectedGroupChannels = [];
       this.ngOnInit();
     })
   }

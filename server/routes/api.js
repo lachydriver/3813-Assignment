@@ -56,6 +56,7 @@ module.exports = function(app){
         group = {}
         group.name = req.body.groupname;
         group.channels = [];
+        group.group_assis = [];
 
         thisdata.groups.push(group);
         var newdata = JSON.stringify(thisdata);
@@ -64,6 +65,7 @@ module.exports = function(app){
             console.log(err);
           }
         })
+        res.send(newdata)
       });
 
       app.post("/api/addchannel", function(req, res) {
@@ -333,6 +335,28 @@ module.exports = function(app){
         })
       }
         res.send(valid)
+      })
+
+      app.get("/api/getgroupassis", function(req, res) {
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        groupassis = {};
+
+        for(i = 0; i < data.users.length; i++){
+          for(y = 0; y < data.groups.length; y++){
+            for(x = 0; x < data.groups[y].group_assis.length; x++){
+              if(data.users[i].username === data.groups[y].group_assis[x]){
+                group = [];
+                group.name = data.groups[y].name
+                group.assisuser = [];
+                group.assisuser.push(data.groups[y].group_assis[x])
+                console.log(group)
+              }
+            }
+          }
+        }
+        res.send(true)
       })
       
 }
