@@ -70,6 +70,26 @@
         </select>
         <button type="submit" (click)="inviteUser()">Invite User</button>
     </form>
+    <h3>Remove Group:</h3>
+    <form>
+        <label>Group:</label>
+        <select name="deleteGroupName" [(ngModel)]="deleteGroupName">
+            <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
+        </select>
+        <label>Channel:</label>
+        <button type="submit" (click)="deleteGroup()">Delete Group</button>
+    </form>
+    <h3>Remove Channel:</h3>
+    <form>
+        <label>Group:</label>
+        <select name="deleteChannelGroupName" [(ngModel)]="deleteChannelGroupName" (ngModelChange)="deleteChannelOptions()">
+            <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
+        </select>
+        <select *ngIf="deleteSelectedGroupChannels" name="deleteChannelName" [(ngModel)]="deleteChannelName">
+                <option *ngFor="let channel of deleteSelectedGroupChannels" [value]="channel">{{channel}}</option>
+        </select>
+        <button type="submit" (click)="deleteChannel()">Delete Channel</button>
+    </form>
     <p>{{inviteError}}</p>
     <div class="userinfo">
         <h3 class="title">Users:</h3>

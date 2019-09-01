@@ -58,4 +58,8 @@ export class LoginService {
   removeUser(deleteUserName: String){
     return this.http.post(this.url + "/api/deleteuser", {deleteUserName})
   }
+
+  deleteGroup(deleteGroupName: String){
+    return this.http.post(this.url + "/api/deletegroup", {deleteGroupName})
+  }
 }

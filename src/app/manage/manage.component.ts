@@ -32,6 +32,10 @@ export class ManageComponent implements OnInit {
   alluserdata: any;
   inviteError: any;
   deleteUserName: any;
+  deleteGroupName: any;
+  deleteChannelGroupName: any;
+  deleteChannelName: any;
+  deleteSelectedGroupChannels: [];
 
   checkRole(){
     if(this.role === "super"){
@@ -92,6 +96,13 @@ export class ManageComponent implements OnInit {
       }
     })
   }
+
+  deleteGroup(){
+    this.loginService.deleteGroup(this.deleteGroupName).subscribe(data => {
+      alert(this.deleteGroupName + " deleted successfully");
+      this.ngOnInit();
+    })
+  }
   
   inviteUser(){
     this.loginService.addUserToChannel(this.inviteGroup, this.inviteChannel, this.inviteUsername).subscribe(data => {
@@ -108,7 +119,14 @@ export class ManageComponent implements OnInit {
     for(let i in this.groups){
       if(this.inviteGroup === this.groups[i].name){
         this.selectedGroupChannels = this.groups[i].channels
-        console.log(this.selectedGroupChannels)
+      }
+    }
+  }
+
+  deleteChannelOptions(){
+    for(let i in this.groups){
+      if(this.deleteChannelGroupName === this.groups[i].name){
+        this.deleteSelectedGroupChannels = this.groups[i].channels
       }
     }
   }
