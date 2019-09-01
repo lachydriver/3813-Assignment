@@ -1,1 +1,1 @@
-{"users":[{"username":"lachydriver","role":"super","email":"lachydriver@gmail.com","groups":[]}],"groups":[]}
+{"users":[{"username":"lachydriver","role":"super","email":"lachydriver@gmail.com","groups":[{"name":"please work","channels":["this is a channel"]}]}],"groups":[{"name":"hey","channels":[],"group_assis":[]},{"name":"please work","channels":["this is a channel"],"group_assis":[]},{"name":"first group","channels":[],"group_assis":[]}]}

@@ -59,12 +59,13 @@ module.exports = function(app){
         group.group_assis = [];
 
         thisdata.groups.push(group);
+        console.log(thisdata)
         var newdata = JSON.stringify(thisdata);
         fs.writeFile("users.json", newdata, function(err) {
           if (err) {
             console.log(err);
           }
-        })
+        });
         res.send(newdata)
       });
 

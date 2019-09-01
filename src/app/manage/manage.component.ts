@@ -70,6 +70,7 @@ export class ManageComponent implements OnInit {
     this.loginService.addgroup(this.groupname).subscribe(data => {
       if(data) {
         alert("Successfully added group: " + this.groupname);
+        this.ngOnInit();
       }
     })
   }
