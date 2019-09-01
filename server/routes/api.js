@@ -213,8 +213,8 @@ module.exports = function(app){
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);
 
-        channel = req.body.deleteChannel;
-        group = req.body.deleteChannelGroup;
+        channel = req.body.deleteChannelName;
+        group = req.body.deleteChannelGroupName;
 
         for(i = 0; i < data.groups.length; i++){
           if(group === data.groups[i].name){
@@ -229,6 +229,9 @@ module.exports = function(app){
 
         function deleteChannelFromUser(){
           for(i = 0; i < data.users.length; i++){
+            if(data.users[i].groups.length === 0){
+              break;
+            } else {
             for(x = 0; x < data.users[i].groups.length; x++){
               if(group === data.users[i].groups[x].name){
                 for(y = 0; y < data.users[i].groups[x].channels.length; y++){
@@ -240,6 +243,7 @@ module.exports = function(app){
             }
           }
         }
+      }
         var newdata = JSON.stringify(data);
         fs.writeFile("users.json", newdata, function(err) {
           if (err) {

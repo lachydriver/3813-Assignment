@@ -103,6 +103,12 @@ export class ManageComponent implements OnInit {
       this.ngOnInit();
     })
   }
+
+  deleteChannel(){
+    this.loginService.deleteChannel(this.deleteChannelGroupName, this.deleteChannelName).subscribe(data => {
+      this.ngOnInit();
+    })
+  }
   
   inviteUser(){
     this.loginService.addUserToChannel(this.inviteGroup, this.inviteChannel, this.inviteUsername).subscribe(data => {

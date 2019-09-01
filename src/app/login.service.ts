@@ -62,4 +62,8 @@ export class LoginService {
   deleteGroup(deleteGroupName: String){
     return this.http.post(this.url + "/api/deletegroup", {deleteGroupName})
   }
+
+  deleteChannel(deleteChannelGroupName: String, deleteChannelName: String){
+    return this.http.post(this.url + "/api/deletechannel", {deleteChannelGroupName, deleteChannelName})
+  }
 }
