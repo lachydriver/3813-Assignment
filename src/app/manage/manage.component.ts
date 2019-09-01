@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { LoginService } from '../login.service';
 import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
 
@@ -40,6 +40,11 @@ export class ManageComponent implements OnInit {
   assisUserList: any;
   isAssisUser: any;
   userAssisGroups: Array<String> = [];
+  removeChannelUserName: any;
+  removeChannelGroupName: any;
+  removeChannelfromUser: any;
+  removeGroupNamePossibilities: Array<String> = [];
+  removeChannelNamePossibilities: Array<String> = [];
 
   checkRole(){
     if(this.role === "super"){
@@ -140,6 +145,27 @@ export class ManageComponent implements OnInit {
         this.deleteSelectedGroupChannels = this.groups[i].channels
       }
     }
+  }
+
+  groupOptions(){
+    for(let i in this.userdata){
+      if(this.removeChannelUserName === this.userdata[i].username){
+        this.removeGroupNamePossibilities = this.userdata[i].groups;
+      }
+    }
+  }
+
+  removeChannelOptions(){
+    for(let i in this.userdata){
+      if(this.removeChannelUserName === this.userdata[i].username){
+        for(let y in this.userdata[i].groups){
+          if(this.removeChannelGroupName === this.userdata[i].groups[y].name){
+            this.removeChannelNamePossibilities = this.userdata[i].groups[y].channels
+          }
+        }
+      }
+    }
+    console.log(this.removeChannelNamePossibilities)
   }
 
   inviteUserToGroup(){

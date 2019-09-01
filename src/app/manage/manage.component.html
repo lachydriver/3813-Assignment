@@ -70,6 +70,22 @@
         </select>
         <button type="submit" (click)="inviteUser()">Invite User</button>
     </form>
+    <h3>Remove User from Channel:</h3>
+    <form>
+        <label>Username:</label>
+        <select name="removeChannelUserName" [(ngModel)]="removeChannelUserName" (ngModelChange)="groupOptions()">
+            <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
+        </select>
+        <label>Group:</label>
+        <select name="removeChannelGroupName" [(ngModel)]="removeChannelGroupName" (ngModelChange)="removeChannelOptions()">
+            <option *ngFor="let group of removeGroupNamePossibilities" [value]="group.name">{{group.name}}</option>
+        </select>
+        <label>Channel:</label>
+        <select name="removeChannelfromUser" [(ngModel)]="removeChannelfromUser">
+                <option *ngFor="let channel of removeChannelNamePossibilities" [value]="channel">{{channel}}</option>
+        </select>
+        <button type="submit" (click)="deleteChannelfromUser()">Delete Channel from User</button>
+    </form>
     <h3>Remove Group:</h3>
     <form>
         <label>Group:</label>
