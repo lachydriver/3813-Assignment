@@ -5,19 +5,15 @@
       "role": "super",
       "groupAdminRole": "true",
       "groups": [
-        { "name": "Group 1", "channels": [] },
-        { "name": "CS:GO", "channels": ["Matchmaking"] }
+        { "name": "Group 1", "channels": ["test"] },
+        { "name": "Group 2", "channels": ["hey there"] },
+        { "name": "new group", "channels": ["first group"] }
       ]
     }
   ],
   "groups": [
-    {
-      "name": "Group 1",
-      "channels": [
-        "Channel 2",
-        "test"
-      ]
-    },
-    { "name": "Group 2", "channels": ["Channel 2", "new", "hey there"] }
+    { "name": "Group 1", "channels": ["Channel 2", "test", "CS"] },
+    { "name": "Group 2", "channels": ["Channel 2", "new", "hey there"] },
+    { "name": "new group", "channels": ["first group"] }
   ]
 }

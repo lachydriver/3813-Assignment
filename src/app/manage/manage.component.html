@@ -35,14 +35,14 @@
     <h3>Invite User to Group:</h3>
     <form>
         <label>Group:</label>
-        <select name="inviteGroup" [(ngModel)]="inviteGroup" (ngModelChange)="channelOptions()">
+        <select name="inviteGroupName" [(ngModel)]="inviteGroupName" (ngModelChange)="channelOptions()">
             <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
         </select>
         <label>Username:</label>
-        <select name="inviteUsername" [(ngModel)]="inviteUsername">
-            <option *ngFor="let user of userdata" [value]="user">{{user}}</option>
+        <select name="inviteGroupUsername" [(ngModel)]="inviteGroupUsername">
+            <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
         </select>
-        <button type="submit" (click)="inviteUser()">Invite User</button>
+        <button type="submit" (click)="inviteUserToGroup()">Invite User</button>
     </form>
     <h3>Invite User to Channel:</h3>
     <form>
@@ -56,10 +56,19 @@
         </select>
         <label>Username:</label>
         <select name="inviteUsername" [(ngModel)]="inviteUsername">
-            <option *ngFor="let user of userdata" [value]="user">{{user}}</option>
+            <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
         </select>
         <button type="submit" (click)="inviteUser()">Invite User</button>
     </form>
     <p>{{inviteError}}</p>
+    <div class="userinfo">
+        <h3 class="title">Users:</h3>
+        <div class="user" *ngFor="let user of userdata">
+            {{user.username}}
+            <p *ngFor="let group of user.groups">{{group.name}} {{group.channels}}</p>
+            
+            Groups: 
+        </div>
+    </div>
 </div>
 </div>

@@ -22,11 +22,14 @@ export class ManageComponent implements OnInit {
   inputChannel: any;
   groupname: any;
   groups: any;
+  inviteGroupUsername: any;
+  inviteGroupName: any;
   inviteGroup: any;
   inviteChannel: any;
   inviteUsername: any;
   selectedGroupChannels: [];
   userdata: any;
+  alluserdata: any;
   inviteError: any;
 
   checkRole(){
@@ -95,6 +98,13 @@ export class ManageComponent implements OnInit {
         console.log(this.selectedGroupChannels)
       }
     }
+  }
+
+  inviteUserToGroup(){
+    this.loginService.addUserToGroup(this.inviteGroupName, this.inviteGroupUsername).subscribe(data =>
+      {
+        console.log(data)
+    })
   }
 
   ngOnInit() {

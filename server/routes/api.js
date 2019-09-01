@@ -114,13 +114,20 @@ module.exports = function(app){
         res.send(userdata)
       });
 
+      app.get("/api/getalluserdata", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        res.send(data.users)
+      })
+
       app.get("/api/getusers", function(req, res) {
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);
         userdata = data.users
         userlist = [];
         for(i = 0; i < userdata.length; i++){
-          userlist.push(userdata[i].username)
+          userlist.push(userdata[i])
         }
         res.send(userlist)        
       })
@@ -283,8 +290,11 @@ module.exports = function(app){
         channel = req.body.inviteChannel;
         valid = false;
 
+        console.log(username)
+
         for(i = 0; i < data.users.length; i++){
           if(username === data.users[i].username) {
+            console.log("USER")
             for(y = 0; y < data.users[i].groups.length; y++){
               if(group === data.users[i].groups[y].name){
                 usergroups = data.users[i].groups[y].channels

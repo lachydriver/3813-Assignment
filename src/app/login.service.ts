@@ -50,4 +50,8 @@ export class LoginService {
   getusers(){
     return this.http.get<User>(this.url + "/api/getusers")
   }
+
+  addUserToGroup( inviteGroupName: String, inviteGroupUsername: String){
+    return this.http.post<User>(this.url + "/api/addgrouptouser", {inviteGroupName, inviteGroupUsername})
+  }
 }
