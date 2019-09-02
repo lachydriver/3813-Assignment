@@ -1,6 +1,7 @@
 import { Component, OnInit, ɵCompiler_compileModuleSync__POST_R3__ } from '@angular/core';
 import { LoginService } from '../login.service';
 import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_check_compiler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage',
@@ -9,7 +10,7 @@ import { TypeCheckCompiler } from '@angular/compiler/src/view_compiler/type_chec
 })
 export class ManageComponent implements OnInit {
 
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService, private router:Router) { }
 
   superLoggedIn: boolean;
   groupAdmin: boolean;
@@ -48,6 +49,11 @@ export class ManageComponent implements OnInit {
   deleteGroupFromUser: any;
   deleteGroupFromUserGroup: any;
   deleteGroupFromUserPossibilities: [];
+
+  logout(){
+    localStorage.setItem('username', '');
+    this.router.navigateByUrl("/");
+  }
 
   checkRole(){
     if(this.role === "super"){

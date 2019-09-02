@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { LoginService } from '../login.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService, private router:Router) { }
 
   manageLoggedIn: boolean;
   username = JSON.parse(localStorage.getItem('username'))
@@ -29,6 +30,11 @@ export class HomeComponent implements OnInit {
     this.loginService.getusergroups(this.username).subscribe(data => {
       this.groups = data;
     })
+  }
+
+  logout(){
+    localStorage.setItem('username', '');
+    this.router.navigateByUrl("/");
   }
 
   selectGroup(name){

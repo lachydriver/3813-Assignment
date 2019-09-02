@@ -16,21 +16,27 @@
 
 .managecontainer {
   background-color: white;
-  height: 80vh;
   border-radius: 15px;
   padding: 15px;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
+.logout {
+  float: right;
+  top: 0;
+  right: 0;
+}
+
+.homelogout {
+  padding: 10px;
+}
+
 .loginform {
   width: 50%;
   margin: 0 auto;
-}
-
-.groupadmin form {
-  
 }
 
 .groupadmin button {
