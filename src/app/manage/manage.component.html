@@ -1,5 +1,5 @@
 <div class="container is-fluid managecontainer">
-<div *ngIf="superLoggedIn">
+<div class="superadmin" *ngIf="superLoggedIn">
 <h3 class="title">Super Admin Commands:</h3>
 <h3>Add User:</h3>
 <form>
@@ -14,8 +14,8 @@
         <option value="groupadmin">Group Admin</option>
         <option value="user">User</option>
     </select>
-    </div>
-    <button class="button" type="submit" (click)="addUser()">Add User</button>
+    </div><br>
+    <button class="button is-success" type="submit" (click)="addUser()">Add User</button>
 </form><br><br>
 <h3>Delete User:</h3>
 <form>
@@ -24,8 +24,8 @@
         <select type="text" name="deleteUserName" [(ngModel)]="deleteUserName">
             <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
         </select>
-        </div>
-        <button class="button" type="submit" (click)="deleteUser()">Delete User</button>
+        </div><br>
+        <button class="button is-success" type="submit" (click)="deleteUser()">Delete User</button>
     </form>
 </div>
 <div *ngIf="groupAdmin" class="groupadmin">

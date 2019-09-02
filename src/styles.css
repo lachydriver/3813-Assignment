@@ -21,7 +21,7 @@
   height: 100%;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .logout {
@@ -42,6 +42,10 @@
 .groupadmin button {
  justify-content: center;
  margin-top: 10px;
+}
+
+.superadmin button{
+  margin-top: 10px;
 }
 
 .messages {
