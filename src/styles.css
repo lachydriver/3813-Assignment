@@ -29,6 +29,15 @@
   margin: 0 auto;
 }
 
+.groupadmin form {
+  
+}
+
+.groupadmin button {
+ justify-content: center;
+ margin-top: 10px;
+}
+
 .messages {
   height: 20vh;
   text-align: left;
