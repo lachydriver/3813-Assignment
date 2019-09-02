@@ -34,7 +34,7 @@
     <form>
         <label>Group Name:</label>
         <input class="input" type="text" name="groupname" [(ngModel)]="groupname">
-        <button type="submit" (click)="addGroup()">Add Group</button>
+        <button class="button is-success" type="submit" (click)="addGroup()">Add Group</button>
     </form><br>
     <h3><b>Add Channel to Group:</b></h3>
     <form>
@@ -184,7 +184,7 @@
                 </tr>
         </table>
         <div class="logout">
-                <button class="button is-info" (click)="goBack()">Home</button>
+                <button class="button is-info" (click)="goBack()">Home</button><br><br>
                 <button class="button is-danger" (click)="logout()">Logout</button>
             </div>
         </div>
