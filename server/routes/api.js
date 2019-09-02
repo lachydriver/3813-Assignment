@@ -210,6 +210,31 @@ module.exports = function(app){
           }
         })
         res.send(data)
+      });
+
+      app.post("/api/removeuserfromgroup", function(req, res){
+        var rawdata = fs.readFileSync("users.json", "utf8");
+        var data = JSON.parse(rawdata);
+
+        user = req.body.deleteGroupFromUser;
+        group = req.body.deleteGroupFromUserGroup;
+
+        for(i=0; i < data.users.length; i++){
+          if(user === data.users[i].username){
+            for(y = 0; y < data.users[i].groups.length; y++){
+              if(group === data.users[i].groups[y].name){
+                data.users[i].groups.splice(y, 1);
+              }
+            }
+          }
+        };
+        var newdata = JSON.stringify(data);
+        fs.writeFile("users.json", newdata, function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+        res.send(data);
       })
 
       app.post("/api/deletechannel", function(req, res){
