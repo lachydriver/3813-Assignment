@@ -75,6 +75,10 @@ export class LoginService {
     return this.http.get(this.url + "/api/getgroupassis")
   }
 
+  deleteChannelfromGroup(deleteGroupFromUser: String, deleteGroupFromUserGroup: String){
+    return this.http.post(this.url + "/api/removeuserfromgroup", {deleteGroupFromUser, deleteGroupFromUserGroup})
+  }
+
   deleteChannelfromUser(removeChannelUserName: String, removeChannelGroupName: String, removeChannelFromUser: String){
     return this.http.post(this.url + "/api/removeuserfromchannel", {removeChannelUserName, removeChannelGroupName, removeChannelFromUser})
   }

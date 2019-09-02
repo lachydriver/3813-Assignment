@@ -45,6 +45,8 @@ export class ManageComponent implements OnInit {
   removeChannelfromUser: any;
   removeGroupNamePossibilities: Array<String> = [];
   removeChannelNamePossibilities: Array<String> = [];
+  deleteGroupFromUser: any;
+  deleteGroupFromUserGroup: any;
 
   checkRole(){
     if(this.role === "super"){
@@ -226,6 +228,8 @@ export class ManageComponent implements OnInit {
   this.removeChannelfromUser = undefined;
   this.removeGroupNamePossibilities = [];
   this.removeChannelNamePossibilities = [];
+  this.deleteGroupFromUser = undefined;
+  this.deleteGroupFromUserGroup = undefined;
   }
 
   ngOnInit() {
