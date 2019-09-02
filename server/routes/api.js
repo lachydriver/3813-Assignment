@@ -30,23 +30,38 @@ module.exports = function(app){
       
         var thisdata = JSON.parse(rawdata);
         user = {};
+
+        valid = true;
       
         user.username = req.body.inputUsername;
         user.role = req.body.inputRole;
         user.email = req.body.inputEmail;
         user.groups = [];
-      
+
+        for(i=0; i < thisdata.users.length; i++){
+          console.log(thisdata.users[i].username)
+          if(user.username === thisdata.users[i].username){
+            console.log("already exists");
+            valid = false;
+            break;
+          }
+        }
+
+        if(valid === true) {
+          thisdata.users.push(user);
+          saveFile();
+        }
+        
         thisdata.users.push(user);
-        console.log(thisdata);
+        function saveFile(){
         var newdata = JSON.stringify(thisdata);
-        console.log(newdata);
         fs.writeFile("users.json", newdata, function(err) {
           if (err) {
             console.log(err);
           }
         });
-      
-        res.send(user);
+      }
+        res.send(valid);
       });
 
       app.post("/api/addgroup", function(req,res) {

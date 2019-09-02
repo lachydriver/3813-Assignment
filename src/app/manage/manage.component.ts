@@ -55,6 +55,10 @@ export class ManageComponent implements OnInit {
     this.router.navigateByUrl("/");
   }
 
+  goBack(){
+    this.router.navigateByUrl("/home");
+  }
+
   checkRole(){
     if(this.role === "super"){
       this.superLoggedIn = true;
@@ -66,10 +70,10 @@ export class ManageComponent implements OnInit {
 
   addUser(){
     this.loginService.adduser(this.inputUsername, this.inputRole, this.inputEmail).subscribe(data => {
-      if(data){
-        alert("Successfully added user: " + this.inputUsername);
-      } else {
-        alert("There was an error adding the user")
+      if(data === false){
+        alert("User already exists");
+      } else if(data === true) {
+        alert("User added successfully")
       }
       this.ngOnInit();
     })

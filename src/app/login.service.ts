@@ -28,7 +28,7 @@ export class LoginService {
   }
 
   adduser(inputUsername: String, inputRole: String, inputEmail: String){
-    return this.http.post<User>(this.url + "/api/adduser", {inputUsername, inputRole, inputEmail})
+    return this.http.post(this.url + "/api/adduser", {inputUsername, inputRole, inputEmail})
   }
 
   addgroup(groupname: String){
