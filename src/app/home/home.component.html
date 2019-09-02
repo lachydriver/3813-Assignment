@@ -1,7 +1,8 @@
 <div class="container homecontainer">
-<p>Welcome {{username}}</p>
+<p class="title">Welcome {{username}}</p>
 <p>Your role: {{role}}</p>
 
+<h3>Group:</h3>
 <div class="tabs">
     <ul>
         <li *ngFor="let group of groups" [value]="group.name" (click)="selectGroup(group.name)"><a>{{group.name}}</a></li>
@@ -11,13 +12,23 @@
 <h3>Channels:</h3>
 <div class="tabs">
     <ul>
-        <li *ngFor><a></a></li>
+        <li *ngFor="let channel of selectedGroupChannels" [value]="channel" (click)="chosenChannel(channel)"><a>{{channel}}</a></li>
     </ul>
 </div>
 </div>
 
-<div *ngIf="manageLoggedIn">
-    <h1>Managing:</h1>
-    <button routerLink="/manage">Manage</button>
+<div class="chat" *ngIf="selectedChannel">
+    <div class = "messages">
+        <p>First Message: Hi</p>
+        <p>Second Message: Hey there</p>
+    </div>
+    <div class="newmessage">
+        <textarea class="textarea" placeholder="New Message" rows="5"></textarea>
+        <a class="button is-info sendbutton">Send Message</a><br><br><br>
+    </div>
+</div>
+
+<div *ngIf="manageLoggedIn" class="managebutton">
+    <a class="button is-success" routerLink="/manage">Manage</a><br><br>
 </div>
 </div>

@@ -29,6 +29,24 @@
   margin: 0 auto;
 }
 
+.messages {
+  height: 20vh;
+  text-align: left;
+}
+
+.newmessage {
+  padding: 15px;
+}
+
+.managebutton {
+  margin: 15px;
+}
+
+.sendbutton {
+  float: left;
+  margin: 20px;
+}
+
 body {
   background: linear-gradient(270deg, #0dffc1, #0d53ff);
   background-size: 400% 400%;

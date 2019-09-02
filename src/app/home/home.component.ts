@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   groups: any;
   selectedGroup: any;
   selectedGroupChannels: [];
+  selectedChannel: String;
 
   checkRole(){
     if(this.role === "super" || this.role === "groupadmin"){
@@ -37,12 +38,16 @@ export class HomeComponent implements OnInit {
   }
 
   selectChannels(){
-    for(let i of this.groups){
-      if(this.selectGroup === this.groups[i].name){
-        this.selectedGroupChannels = this.groups[i].channels
+    for(var i = 0; i < this.groups.length; i++){
+      if(this.selectedGroup === this.groups[i].name){
+        this.selectedGroupChannels = this.groups[i].channels;
       }
     }
     console.log(this.selectedGroupChannels)
+  }
+
+  chosenChannel(channel){
+    this.selectedChannel = channel
   }
 
   ngOnInit() {

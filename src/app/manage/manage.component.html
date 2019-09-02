@@ -4,24 +4,28 @@
 <h3>Add User:</h3>
 <form>
     <label>Username:</label>
-    <input type="text" name="inputUsername" [(ngModel)]="inputUsername">
+    <input class="input" type="text" name="inputUsername" [(ngModel)]="inputUsername">
     <label>Email:</label>
-    <input type="text" name="inputEmail" [(ngModel)]="inputEmail">
+    <input class="input" type="text" name="inputEmail" [(ngModel)]="inputEmail">
     <label>Role:</label>
+    <div class="select">
     <select name="inputRole" [(ngModel)]="inputRole">
         <option value="super">Super</option>
         <option value="groupadmin">Group Admin</option>
         <option value="user">User</option>
     </select>
-    <button type="submit" (click)="addUser()">Add User</button>
+    </div>
+    <button class="button" type="submit" (click)="addUser()">Add User</button>
 </form>
 <h3>Delete User:</h3>
 <form>
         <label>Username:</label>
+        <div class="select">
         <select type="text" name="deleteUserName" [(ngModel)]="deleteUserName">
             <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
         </select>
-        <button type="submit" (click)="deleteUser()">Delete User</button>
+        </div>
+        <button class="button" type="submit" (click)="deleteUser()">Delete User</button>
     </form>
 </div>
 <div *ngIf="groupAdmin">
@@ -29,7 +33,7 @@
     <h3>Add Group:</h3>
     <form>
         <label>Group Name:</label>
-        <input type="text" name="groupname" [(ngModel)]="groupname">
+        <input class="input" type="text" name="groupname" [(ngModel)]="groupname">
         <button type="submit" (click)="addGroup()">Add Group</button>
     </form>
     <h3>Add Channel to Group:</h3>
@@ -39,7 +43,7 @@
             <option *ngFor="let group of groups" [value]="group.name">{{group.name}}</option>
         </select>
         <label>Channel Name:</label>
-        <input name="inputChannel" [(ngModel)]="inputChannel">
+        <input class="input" name="inputChannel" [(ngModel)]="inputChannel">
         <button type="submit" (click)="addChannel()">Add Channel</button>
     </form>
     <h3>Invite User to Group:</h3>
