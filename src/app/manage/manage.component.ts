@@ -47,6 +47,7 @@ export class ManageComponent implements OnInit {
   removeChannelNamePossibilities: Array<String> = [];
   deleteGroupFromUser: any;
   deleteGroupFromUserGroup: any;
+  deleteGroupFromUserPossibilities: [];
 
   checkRole(){
     if(this.role === "super"){
@@ -158,6 +159,14 @@ export class ManageComponent implements OnInit {
     }
   }
 
+  deleteGroupOptions(){
+    for(let i in this.userdata){
+      if(this.deleteGroupFromUser === this.userdata[i].username){
+        this.deleteGroupFromUserPossibilities = this.userdata[i].groups;
+      }
+    }
+  }
+
   removeChannelOptions(){
     for(let i in this.userdata){
       if(this.removeChannelUserName === this.userdata[i].username){
@@ -199,6 +208,13 @@ export class ManageComponent implements OnInit {
     })
   }
 
+  deleteGroupFromUserFunction(){
+    this.loginService.deleteGroupFromUser(this.deleteGroupFromUser, this.deleteGroupFromUserGroup).subscribe(data => {
+      alert("Deleted group from user");
+      this.ngOnInit();
+    })
+  }
+
   getAssisGroups(){
 
   }
@@ -230,6 +246,7 @@ export class ManageComponent implements OnInit {
   this.removeChannelNamePossibilities = [];
   this.deleteGroupFromUser = undefined;
   this.deleteGroupFromUserGroup = undefined;
+  this.deleteGroupFromUserPossibilities = [];
   }
 
   ngOnInit() {

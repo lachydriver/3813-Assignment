@@ -86,6 +86,22 @@
         </div><br>
         <button class="button is-success" type="submit" (click)="inviteUser()">Invite User</button>
     </form><br>
+    <h3><b>Remove User from Group:</b></h3>
+    <form>
+        <label>Username:</label>
+        <div class="select">
+        <select name="deleteGroupFromUser" [(ngModel)]="deleteGroupFromUser" (ngModelChange)="deleteGroupOptions()">
+            <option *ngFor="let user of userdata" [value]="user.username">{{user.username}}</option>
+        </select>
+        </div>
+        <label *ngIf="deleteGroupFromUser">Group:</label>
+        <div class="select" *ngIf="deleteGroupFromUser">
+        <select name="deleteGroupFromUserGroup" [(ngModel)]="deleteGroupFromUserGroup">
+            <option *ngFor="let group of deleteGroupFromUserPossibilities" [value]="group.name">{{group.name}}</option>
+        </select>
+        </div><br>
+        <button class="button is-danger" type="submit" (click)="deleteGroupFromUserFunction()">Delete Channel from User</button>
+    </form><br>
     <h3><b>Remove User from Channel:</b></h3>
     <form>
         <label>Username:</label>
