@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,14 @@ import { JsonPipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService:LoginService) { }
 
   manageLoggedIn: boolean;
-  email = JSON.parse(localStorage.getItem('username'))
+  username = JSON.parse(localStorage.getItem('username'))
   role = JSON.parse(localStorage.getItem('role'));
+  groups: any;
+  selectedGroup: any;
+  selectedGroupChannels: [];
 
   checkRole(){
     if(this.role === "super" || this.role === "groupadmin"){
@@ -20,8 +24,30 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  getUserInfo(){
+    this.loginService.getusergroups(this.username).subscribe(data => {
+      this.groups = data;
+    })
+  }
+
+  selectGroup(name){
+    this.selectedGroup = name;
+    console.log(this.selectedGroup)
+    this.selectChannels();
+  }
+
+  selectChannels(){
+    for(let i of this.groups){
+      if(this.selectGroup === this.groups[i].name){
+        this.selectedGroupChannels = this.groups[i].channels
+      }
+    }
+    console.log(this.selectedGroupChannels)
+  }
+
   ngOnInit() {
-    this.checkRole()
+    this.checkRole();
+    this.getUserInfo();
   }
 
 }

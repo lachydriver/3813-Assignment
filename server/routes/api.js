@@ -102,20 +102,20 @@ module.exports = function(app){
         res.send(data);
       });
 
-      app.get("/api/getusergroups", function(req, res){
+      app.post("/api/getusergroups", function(req, res){
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);
 
-        username = req.body.username
+        username = req.body.username;
 
         for(i= 0; i < data.users.length; i++){
           if(username === data.users[i].username){
             userdata = data.users[i]
           } else {
-            res.send(false);
+            break;
           }
         }
-        res.send(userdata)
+        res.send(userdata.groups)
       });
 
       app.get("/api/getalluserdata", function(req, res){

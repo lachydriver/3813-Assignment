@@ -201,11 +201,39 @@ export class ManageComponent implements OnInit {
 
   }
 
+  resetVariables(){
+  this.inputUsername = undefined;
+  this.inputRole = undefined;
+  this.inputEmail = undefined;
+  this.inputGroup = undefined;
+  this.inputChannel = undefined;
+  this.groupname = undefined;
+  this.inviteGroupUsername = undefined;
+  this.inviteGroupName = undefined;
+  this.inviteGroup = undefined;
+  this.inviteChannel = undefined;
+  this.inviteUsername = undefined;
+  this.selectedGroupChannels = [];
+  this.inviteError = undefined;
+  this.deleteUserName = undefined;
+  this.deleteGroupName = undefined;
+  this.deleteChannelGroupName = undefined;
+  this.deleteChannelName = undefined;
+  this.deleteSelectedGroupChannels = [];
+  this.userAssisGroups = [];
+  this.removeChannelUserName = undefined;
+  this.removeChannelGroupName = undefined;
+  this.removeChannelfromUser = undefined;
+  this.removeGroupNamePossibilities = [];
+  this.removeChannelNamePossibilities = [];
+  }
+
   ngOnInit() {
     this.checkRole();
     this.getGroups();
     this.getUsers();
     this.getAssisUsers();
+    this.resetVariables();
     console.log(this.userAssisGroups)
   }
 

@@ -1,6 +1,21 @@
 <div class="container homecontainer">
-<p>Welcome {{email}}</p>
+<p>Welcome {{username}}</p>
 <p>Your role: {{role}}</p>
+
+<div class="tabs">
+    <ul>
+        <li *ngFor="let group of groups" [value]="group.name" (click)="selectGroup(group.name)"><a>{{group.name}}</a></li>
+    </ul>
+</div>
+<div *ngIf="selectedGroup">
+<h3>Channels:</h3>
+<div class="tabs">
+    <ul>
+        <li *ngFor><a></a></li>
+    </ul>
+</div>
+</div>
+
 <div *ngIf="manageLoggedIn">
     <h1>Managing:</h1>
     <button routerLink="/manage">Manage</button>
