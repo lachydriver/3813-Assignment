@@ -22,8 +22,8 @@ export class LoginService {
 
   constructor(private http:HttpClient) { }
 
-  login(inputUsername: string){
-    return this.http.post<User>(this.url + "/api/login", {inputUsername: inputUsername})
+  login(inputUsername: string, inputPassword: string){
+    return this.http.post<User>(this.url + "/api/login", {inputUsername, inputPassword})
     
   }
 

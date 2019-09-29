@@ -3,7 +3,7 @@
 <div class="loginform">
 <form>
     <input type="text" name="inputUsername" id="inputUsername" [(ngModel)]="inputUsername" class="input is-info" placeholder="Username"><br><br>
-    <input type="password" name="password" id="password" class="input is-info" placeholder="Password"><br><br>
+    <input type="password" name="inputPassword" id="inputPassword" [(ngModel)]="inputPassword" class="input is-info" placeholder="Password"><br><br>
     <button type="submit" (click)="submitClicked()" class="button is-dark">Submit</button><br>
     {{error}}
 </form>

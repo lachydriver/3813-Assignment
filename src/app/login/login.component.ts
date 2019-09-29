@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   inputUsername: any;
+  inputPassword: any;
   error: any;
 
 
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   submitClicked(){
-     this.loginService.login(this.inputUsername).subscribe(data => {
+     this.loginService.login(this.inputUsername, this.inputPassword).subscribe(data => {
        if(data.valid === true){
         localStorage.setItem('username', JSON.stringify(data.username));
         localStorage.setItem('role', JSON.stringify(data.role));
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
 
        } else {
          this.error = "Invalid Username"
+         console.log(data)
        }
      }
 

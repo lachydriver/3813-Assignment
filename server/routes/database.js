@@ -4,20 +4,32 @@ module.exports = function(db, app) {
       return res.sendStatus(400);
     }
 
-    user = req.body;
+    username = req.body.inputUsername;
+    password = req.body.inputPassword;
 
-    console.log(user.username);
-    user.valid = null;
+    user = {};
+    user.valid = null
+
+    console.log(username);
+    console.log(password)
 
     const collection = db.collection("users");
 
-    collection.findOne({ username: user.username }, function(err, data) {
-      console.log(data);
-      if (user.password === data.password) {
-        res.json("user login accepted");
-      } else {
-        res.json("not accepted");
-      }
+    collection.findOne({ username: username }, function(err, data) {
+        if(!data){
+            return res.status(404).json({usernamenotfound: "Username not found"})
+        }
+
+        if(password === data.password){
+            user.valid = true;
+            user.username = username;
+            user.role = data.role;
+            console.log("username found");
+            res.json(user);
+        } else {
+            user.valid = false;
+            res.json(user);
+        }
     });
   });
 };
