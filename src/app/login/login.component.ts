@@ -26,16 +26,28 @@ export class LoginComponent implements OnInit {
 
   submitClicked(){
      this.loginService.login(this.inputUsername, this.inputPassword).subscribe(data => {
+       console.log(data);
        if(data.valid === true){
         localStorage.setItem('username', JSON.stringify(data.username));
         localStorage.setItem('role', JSON.stringify(data.role));
-        localStorage.setItem('groupAdminRole', JSON.stringify(data.groupAdminRole))
-        this.router.navigateByUrl("/home")
+        localStorage.setItem('groupAdminRole', JSON.stringify(data.groupAdminRole));
+        this.router.navigateByUrl("/home");
+
+       } else if (data.valid === false){
+        this.error = "Password Incorrect";
+       } else if(data.valid === null){
+         this.error = "username not found";
+       }
+/*        if(data.valid === true){
+        localStorage.setItem('username', JSON.stringify(data.username));
+        localStorage.setItem('role', JSON.stringify(data.role));
+        localStorage.setItem('groupAdminRole', JSON.stringify(data.groupAdminRole));
+        this.router.navigateByUrl("/home");
 
        } else {
          this.error = "Invalid Username"
          console.log(data)
-       }
+       } */
      }
 
      )
