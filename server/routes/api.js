@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-module.exports = function(app){
+module.exports = function(db, app){
     app.post("/api/login", function(req, res) {
         var rawdata = fs.readFileSync("users.json", "utf8");
         var data = JSON.parse(rawdata);
