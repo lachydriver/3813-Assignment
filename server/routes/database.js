@@ -103,8 +103,40 @@ module.exports = function(db, app) {
   app.post("/api/getusergroups", function(req, res) {
     const collection = db.collection("users");
 
-    
-  })
+    username = req.body.username;
 
+    collection.find({username: username}).toArray(function(err, data) {
+      res.send(data[0].groups)
+    });
+  });
+
+  //FIX ROUTE
+  app.post("/api/addgrouptouser", function(req, res) {
+    newgroup = {};
+    newgroup.name = req.body.inviteGroupName;
+    newgroup.channels = [];
+    username = req.body.inviteGroupUsername;
+
+
+  });
+
+  app.post("/api/deleteuser", function(req, res) {
+    user = req.body.deleteUserName;
+
+    const collection = db.collection("users");
+
+    collection.deleteOne({username: user});
+    res.send(true);
+  });
+
+  app.post("/api/removeuserfromchannel", function(req, res) {
+
+  });
+
+  app.post("/api/removeuserfromgroup", function(req, res) {
+
+  });
+
+  
 
 };
