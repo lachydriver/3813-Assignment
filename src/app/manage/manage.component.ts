@@ -81,9 +81,11 @@ export class ManageComponent implements OnInit {
 
   addGroup(){
     this.loginService.addgroup(this.groupname).subscribe(data => {
-      if(data) {
+      if(data === true) {
         alert("Successfully added group: " + this.groupname);
         this.ngOnInit();
+      } else if (data === false) {
+        alert("Failed to add group because it already exists");
       }
     })
   }

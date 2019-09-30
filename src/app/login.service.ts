@@ -32,7 +32,7 @@ export class LoginService {
   }
 
   addgroup(groupname: String){
-    return this.http.post<Group>(this.url + "/api/addgroup", {groupname})
+    return this.http.post(this.url + "/api/addgroup", {groupname})
   }
 
   getgroup(){

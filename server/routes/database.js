@@ -52,9 +52,9 @@ module.exports = function(db, app) {
     collection.find({ username: user.username }).count((err, count) => {
       if(count == 0){
         collection.insertOne(user);
-        res.json(user);
+        res.send(true);
       } else {
-        res.send({error: 'user already exists'})
+        res.send(false);
       }
     });
   });
@@ -70,10 +70,41 @@ module.exports = function(db, app) {
     collection.find({name: group.name}).count((err, count) => {
       if(count == 0){
         collection.insertOne(group);
-        res.json(group)
+        res.send(true)
       } else {
-        res.send({error: 'group already exists'});
+        res.send(false);
+      }
+    });
+  });
+
+  //FIX THIS ROUTE
+  app.post("/api/addchannel", function(req, res) {
+    groupname = req.body.inputGroup;
+    channelname = req.body.inputChannel;
+
+    const collection = db.collection("groups");
+
+    collection.find({name: groupname, channels: {$elemMatch: {$gte: channelname}}}).count((err, count) => {
+      if(count == 0){
+        console.log("channel not in group")
+      } else {
+        console.log("Channel already in group")
       }
     })
+  });
+
+  app.get("/api/getgroups", function(req, res) {
+    const collection = db.collection("groups");
+    collection.find({}).toArray(function(err, data) {
+      res.send(data);
+    })
+  });
+
+  app.post("/api/getusergroups", function(req, res) {
+    const collection = db.collection("users");
+
+    
   })
+
+
 };
