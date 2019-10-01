@@ -106,7 +106,7 @@ module.exports = function(db, app) {
     username = req.body.username;
 
     collection.find({username: username}).toArray(function(err, data) {
-      res.send(data[0].groups)
+      res.send(data[0].groups);
     });
   });
 
@@ -117,6 +117,30 @@ module.exports = function(db, app) {
     newgroup.channels = [];
     username = req.body.inviteGroupUsername;
 
+
+  });
+
+  app.get("/api/getalluserdata", function(req, res) {
+    const collection = db.collection("users");
+    users = []
+    collection.find({}).toArray(function(err, data) {
+      res.send(data.users);
+    });
+  });
+
+  app.get("/api/getusers", function(req, res) {
+    const collection = db.collection("users");
+
+    userlist = [];
+    collection.find({}).forEach(function(element) {
+      userlist.push(element)
+    });
+
+
+    res.send(userlist);
+  });
+
+  app.post("/api/addgrouptouser", function(req, res) {
 
   });
 
@@ -137,6 +161,22 @@ module.exports = function(db, app) {
 
   });
 
-  
+  //FIX ROUTE
+  app.post("/api/deletechannel", function(req, res) {
+    groupcollection = db.collection("groups");
+    usercollection = db.collection("users");
 
+    channel = req.body.deleteChannelName;
+    group = req.body.deleteChannelGroupName;
+
+    groupcollection.findOneAndUpdate(query, {$pull: {}});
+  });
+
+  app.post("/api/deletechannel", function(req, res) {
+
+  });
+
+  app.post("/api/getgroupassis", function(req, res) {
+    
+  });
 };
