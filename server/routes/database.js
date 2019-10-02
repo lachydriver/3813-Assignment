@@ -191,7 +191,7 @@ module.exports = function(db, app) {
       if(err){
         console.log(err)
       } else {
-        console.log("Deleted successfully")
+        console.log("Deleted successfully");
         res.send(data);
       };
     });

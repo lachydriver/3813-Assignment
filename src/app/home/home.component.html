@@ -19,11 +19,10 @@
 
 <div class="chat" *ngIf="selectedChannel">
     <div class = "messages">
-        <p>First Message: Hi</p>
-        <p>Second Message: Hey there</p>
+        <p *ngFor="let message of messages">{{message}}</p>
     </div>
     <div class="newmessage">
-        <textarea class="textarea" placeholder="New Message" rows="5"></textarea>
+        <input class="text" placeholder="New Message" rows="5" [(ngModel)]="messagecontent" name="messagecontent"/>
         <a class="button is-info sendbutton">Send Message</a><br><br><br>
     </div>
 </div>

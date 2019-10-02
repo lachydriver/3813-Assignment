@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { LoginService } from '../login.service';
+import { SocketService } from '../services/socket.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit {
   selectedGroup: any;
   selectedGroupChannels: [];
   selectedChannel: String;
+  messagecontent: String;
+  messages: string[] = [];
 
   checkRole(){
     if(this.role === "super" || this.role === "groupadmin"){
@@ -57,6 +60,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    //initialise sockets
+    this.socketService.initSocket();
+
     this.checkRole();
     this.getUserInfo();
   }
