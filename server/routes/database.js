@@ -1,4 +1,6 @@
 module.exports = function(db, app) {
+
+  //DONE
   app.post("/api/login", function(req, res) {
     if (!req.body) {
       return res.sendStatus(400);
@@ -32,6 +34,7 @@ module.exports = function(db, app) {
     });
   });
 
+  //DONE
   app.post("/api/adduser", function(req, res) {
     user = {};
 
@@ -59,6 +62,7 @@ module.exports = function(db, app) {
     });
   });
 
+  //DONE
   app.post("/api/addgroup", function(req, res) {
     group = {};
     group.name = req.body.groupname;
@@ -93,6 +97,7 @@ module.exports = function(db, app) {
     })
   });
 
+  //DONE
   app.get("/api/getgroups", function(req, res) {
     const collection = db.collection("groups");
     collection.find({}).toArray(function(err, data) {
@@ -100,6 +105,7 @@ module.exports = function(db, app) {
     })
   });
 
+  //DONE
   app.post("/api/getusergroups", function(req, res) {
     const collection = db.collection("users");
 
@@ -110,14 +116,22 @@ module.exports = function(db, app) {
     });
   });
 
-  //FIX ROUTE
+  //DONE
   app.post("/api/addgrouptouser", function(req, res) {
     newgroup = {};
     newgroup.name = req.body.inviteGroupName;
     newgroup.channels = [];
     username = req.body.inviteGroupUsername;
 
+    collection = db.collection("users");
 
+    collection.findOneAndUpdate({username: username}, {$push: {groups: newgroup}}, function(err, data) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(data);
+      }
+    })
   });
 
   app.get("/api/getalluserdata", function(req, res) {
@@ -172,8 +186,19 @@ module.exports = function(db, app) {
     groupcollection.findOneAndUpdate(query, {$pull: {}});
   });
 
-  app.post("/api/deletechannel", function(req, res) {
+  //DONE
+  app.post("/api/deletegroup", function(req, res) {
+    collection = db.collection("groups");
 
+    group = req.body.deleteGroupName;
+
+    collection.deleteOne({name: group}, function(err, data) {
+      if(err){
+        res.send(err)
+      } else {
+        console.log("Document deleted")
+      };
+    })
   });
 
   app.post("/api/getgroupassis", function(req, res) {
