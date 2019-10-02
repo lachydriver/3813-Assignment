@@ -1,5 +1,4 @@
 module.exports = function(db, app) {
-
   //DONE
   app.post("/api/login", function(req, res) {
     if (!req.body) {
@@ -53,7 +52,7 @@ module.exports = function(db, app) {
     user.groups = [{}];
 
     collection.find({ username: user.username }).count((err, count) => {
-      if(count == 0){
+      if (count == 0) {
         collection.insertOne(user);
         res.send(true);
       } else {
@@ -71,10 +70,10 @@ module.exports = function(db, app) {
 
     const collection = db.collection("groups");
 
-    collection.find({name: group.name}).count((err, count) => {
-      if(count == 0){
+    collection.find({ name: group.name }).count((err, count) => {
+      if (count == 0) {
         collection.insertOne(group);
-        res.send(true)
+        res.send(true);
       } else {
         res.send(false);
       }
@@ -88,13 +87,18 @@ module.exports = function(db, app) {
 
     const collection = db.collection("groups");
 
-    collection.find({name: groupname, channels: {$elemMatch: {$gte: channelname}}}).count((err, count) => {
-      if(count == 0){
-        console.log("channel not in group")
-      } else {
-        console.log("Channel already in group")
-      }
-    })
+    collection
+      .find({
+        name: groupname,
+        channels: { $elemMatch: { $gte: channelname } }
+      })
+      .count((err, count) => {
+        if (count == 0) {
+          console.log("channel not in group");
+        } else {
+          console.log("Channel already in group");
+        }
+      });
   });
 
   //DONE
@@ -102,7 +106,7 @@ module.exports = function(db, app) {
     const collection = db.collection("groups");
     collection.find({}).toArray(function(err, data) {
       res.send(data);
-    })
+    });
   });
 
   //DONE
@@ -111,8 +115,26 @@ module.exports = function(db, app) {
 
     username = req.body.username;
 
-    collection.find({username: username}).toArray(function(err, data) {
+    collection.find({ username: username }).toArray(function(err, data) {
       res.send(data[0].groups);
+    });
+  });
+
+  //DONE
+  app.get("/api/getusers", function(req, res) {
+    const collection = db.collection("users");
+
+    userlist = [];
+    collection.find({}).toArray(function(err, data) {
+      res.send(data)
+    });
+  });
+
+  app.get("/api/getalluserdata", function(req, res) {
+    const collection = db.collection("users");
+    users = [];
+    collection.find({}).toArray(function(err, data) {
+      res.send(data.users);
     });
   });
 
@@ -125,55 +147,37 @@ module.exports = function(db, app) {
 
     collection = db.collection("users");
 
-    collection.findOneAndUpdate({username: username}, {$push: {groups: newgroup}}, function(err, data) {
-      if(err) {
-        console.log(err);
-      } else {
-        console.log(data);
+    collection.findOneAndUpdate(
+      { username: username },
+      { $push: { groups: newgroup } },
+      function(err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data);
+        }
       }
-    })
+    );
   });
 
-  app.get("/api/getalluserdata", function(req, res) {
-    const collection = db.collection("users");
-    users = []
-    collection.find({}).toArray(function(err, data) {
-      res.send(data.users);
-    });
-  });
-
-  app.get("/api/getusers", function(req, res) {
-    const collection = db.collection("users");
-
-    userlist = [];
-    collection.find({}).forEach(function(element) {
-      userlist.push(element)
-    });
 
 
-    res.send(userlist);
-  });
 
-  app.post("/api/addgrouptouser", function(req, res) {
 
-  });
+  app.post("/api/addgrouptouser", function(req, res) {});
 
   app.post("/api/deleteuser", function(req, res) {
     user = req.body.deleteUserName;
 
     const collection = db.collection("users");
 
-    collection.deleteOne({username: user});
+    collection.deleteOne({ username: user });
     res.send(true);
   });
 
-  app.post("/api/removeuserfromchannel", function(req, res) {
+  app.post("/api/removeuserfromchannel", function(req, res) {});
 
-  });
-
-  app.post("/api/removeuserfromgroup", function(req, res) {
-
-  });
+  app.post("/api/removeuserfromgroup", function(req, res) {});
 
   //FIX ROUTE
   app.post("/api/deletechannel", function(req, res) {
@@ -183,7 +187,7 @@ module.exports = function(db, app) {
     channel = req.body.deleteChannelName;
     group = req.body.deleteChannelGroupName;
 
-    groupcollection.findOneAndUpdate(query, {$pull: {}});
+    groupcollection.findOneAndUpdate(query, { $pull: {} });
   });
 
   //DONE
@@ -192,16 +196,14 @@ module.exports = function(db, app) {
 
     group = req.body.deleteGroupName;
 
-    collection.deleteOne({name: group}, function(err, data) {
-      if(err){
-        res.send(err)
+    collection.deleteOne({ name: group }, function(err, data) {
+      if (err) {
+        res.send(err);
       } else {
-        console.log("Document deleted")
-      };
-    })
+        console.log("Document deleted");
+      }
+    });
   });
 
-  app.post("/api/getgroupassis", function(req, res) {
-    
-  });
+  app.post("/api/getgroupassis", function(req, res) {});
 };
