@@ -14,6 +14,7 @@ module.exports = {
 
         chat.on('connection',(socket) => {
             socket.on('message',(message)=> {
+                console.log("Message sent: " + message)
                 for(i=0; i<socketRoom.length;i++) {
                     if (socketRoom[i][0] == socket.id){
                         chat.to(socketRoom[i][1]).emit('message', message);
@@ -21,7 +22,8 @@ module.exports = {
                 }
             });
 
-            socket.on("joinroom",(room) => {
+            socket.on("joinRoom",(room) => {
+                console.log('user joined')
                 if(room.includes(room)){
                     socket.join(room, ()=> {
                         var inroomSocketarray = false;

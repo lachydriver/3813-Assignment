@@ -24,7 +24,7 @@ export class SocketService {
   }
 
   sendMessage(message: String): void {
-    this.socket.emit(message);
+    this.socket.emit('message', message);
   }
 
   getMessage(next){

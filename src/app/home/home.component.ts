@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   getUserInfo(){
     this.loginService.getusergroups(this.username).subscribe(data => {
       this.groups = data;
-    })
+    });
   }
 
   logout(){
@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
 
   chosenChannel(channel){
     this.selectedChannel = channel;
+    this.socketService.joinroom(this.selectedGroup,this.selectedChannel)
 
 
   }
@@ -73,7 +74,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     //initialise sockets
     this.socketService.initSocket();
-
+    this.socketService.getMessage((m)=>{this.messages.push(m)});
 
     this.checkRole();
     this.getUserInfo();
