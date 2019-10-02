@@ -15,15 +15,15 @@ export class SocketService {
     this.socket = io(SERVER_URL);
   }
 
-  joinroom(selectedChannel):void {
-    this.socket.emit("joinRoom",selectedChannel);
+  joinroom(selectedGroup,selectedChannel):void {
+    this.socket.emit("joinRoom",selectedGroup+selectedChannel);
   }
 
-  leaveroom(selectedChannel):void {
-    this.socket.emit("leaveRoom",selectedChannel);
+  leaveroom(selectedGroup,selectedChannel):void {
+    this.socket.emit("leaveRoom",selectedGroup+selectedChannel);
   }
 
-  sendMessage(message: string): void {
+  sendMessage(message: String): void {
     this.socket.emit(message);
   }
 

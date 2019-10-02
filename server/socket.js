@@ -1,15 +1,14 @@
 module.exports = {
 
-    connect: function(db, io, PORT) {
-        var rooms = [];
+    connect: function(io, PORT) {
         var socketRoom = [];
         var socketRoomnum = [];
 
-        const collection = db.collection("groups");
+        //const collection = db.collection("groups");
 
-        collection.find({}).foreach(function(err, data) {
-            rooms.push(data);
-        });
+        //collection.find({}).foreach(function(err, data) {
+        //    rooms.push(data);
+        // });
         
         const chat = io.of("/chat");
 
@@ -56,7 +55,37 @@ module.exports = {
             });
 
             socket.on("leaveroom",(room)=> {
-                
+                for (let i=0; i<socketRoom.length; i++){
+                    if(socketRoom[i][0] == socket.id){
+                        socketRoom.splice(i,1);
+                        socket.leave(room);
+                        chat.to(room).emit("notice", "A user has left")
+                    }
+                }
+
+                for (let j=0;j<socketRoomnum.length;j++){
+                    if(socketRoomnum[j][0]== room){
+                        socketRoomnum[j][1] = socketRoomnum[j][1] -1;
+                        if(socketRoomnum[j][1] ==0){
+                            socketRoomnum.splice(j,1);
+                        }
+                    }
+                }
+            });
+
+            socket.on("disconnect",()=> {
+                chat.emit("disconnect");
+                for (let i=0;i<socketRoom.length;i++){
+                    if(socketRoom[i][0] ==socket.id){
+                        socketRoom.splice(i,1);
+                    }
+                }
+                for (let j=0; j<socketRoomnum.length; j++){
+                    if(socketRoomnum[j][0] == socket.room){
+                        socketRoomnum[j][1] = socketRoomnum[j][1] -1;
+                    }
+                }
+                console.log("Client disconnected")
             })
         });
     }

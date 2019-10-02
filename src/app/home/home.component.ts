@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private loginService:LoginService, private router:Router) { }
+  constructor(private socketService:SocketService, private loginService:LoginService, private router:Router) { }
 
   manageLoggedIn: boolean;
   username = JSON.parse(localStorage.getItem('username'))
@@ -56,12 +56,24 @@ export class HomeComponent implements OnInit {
   }
 
   chosenChannel(channel){
-    this.selectedChannel = channel
+    this.selectedChannel = channel;
+
+
+  }
+
+  chat() {
+    if(this.messagecontent) {
+      this.socketService.sendMessage(this.messagecontent);
+      this.messagecontent = null;
+    } else {
+      console.log("No message");
+    }
   }
 
   ngOnInit() {
     //initialise sockets
     this.socketService.initSocket();
+
 
     this.checkRole();
     this.getUserInfo();
