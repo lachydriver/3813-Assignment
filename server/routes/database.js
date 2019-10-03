@@ -177,7 +177,7 @@ module.exports = function(db, app) {
     group = req.body.removeChannelGroupName;
     channel = req.body.removeChannelFromUser;
 
-    //collection.findOneAndUpdate({username: user}, {$pull: {"groups": }})
+    collection.findOneAndUpdate({username: user}, {$pull: {"groups": {name: group, channels: channel}}})
   });
 
   //DONE
@@ -205,7 +205,21 @@ module.exports = function(db, app) {
     channel = req.body.deleteChannelName;
     group = req.body.deleteChannelGroupName;
 
-    groupcollection.findOneAndUpdate(query, { $pull: {} });
+    groupcollection.findOneAndUpdate({'name': group}, { $pull: {'channels': channel}}, function(err, data) {
+      if(err) {
+        console.log(err)
+      } else {
+        res.send(data)
+      }
+    });
+
+    usercollection.updateMany({'groups.name': group}, {$pull: {'groups.$.channels': channel}}, function(err, data) {
+      if(err) {
+        console.log(err);
+      } else {
+        res.send(data);
+      }
+    })
   });
 
   //DONE
