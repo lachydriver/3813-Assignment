@@ -87,11 +87,7 @@ module.exports = function(db, app) {
 
     const collection = db.collection("groups");
 
-    collection
-      .find({
-        name: groupname,
-        channels: { $elemMatch: { $gte: channelname } }
-      })
+    collection.find({name: groupname, channels: { $elemMatch: { $gte: channelname }}})
       .count((err, count) => {
         if (count == 0) {
           console.log("channel not in group");
@@ -169,7 +165,7 @@ module.exports = function(db, app) {
     res.send(true);
   });
 
-  //FIX
+  //DONE
   app.post("/api/removeuserfromchannel", function(req, res) {
     collection = db.collection("users");
 
@@ -177,8 +173,33 @@ module.exports = function(db, app) {
     group = req.body.removeChannelGroupName;
     channel = req.body.removeChannelFromUser;
 
-    collection.findOneAndUpdate({username: user}, {$pull: {"groups": {name: group, channels: channel}}})
+    collection.findOneAndUpdate({username: user, 'groups.name': group}, {$pull: {'groups.$.channels': channel}}, function(err, data) {
+      if(err) {
+        console.log(err)
+      } else {
+        res.send(data)
+      }
+    })
   });
+
+  app.post("/api/addusertochannel", function(req, res) {
+    username = req.body.inviteUsername;
+    group = req.body.inviteGroup;
+    channel = req.body.inviteChannel;
+
+    collection = db.collection("users");
+
+    collection.find({'username': username, 'groups':{$elemMatch: {"name": group, "channels": channel}}}).count((err, count) => {
+      if(err) {
+        console.log(err)
+      } else if (count == 0) {
+        collection.findOneAndUpdate({username: username, 'groups.name': group}, {$push: {channels: channel}})
+        res.send(true)
+      } else {
+        console.log("channel found")
+      }
+    })
+  })
 
   //DONE
   app.post("/api/removeuserfromgroup", function(req, res) {
@@ -197,7 +218,7 @@ module.exports = function(db, app) {
     });
   });
 
-  //FIX ROUTE
+  //DONE
   app.post("/api/deletechannel", function(req, res) {
     groupcollection = db.collection("groups");
     usercollection = db.collection("users");
@@ -209,7 +230,7 @@ module.exports = function(db, app) {
       if(err) {
         console.log(err)
       } else {
-        res.send(data)
+        console.log("Deleted group")
       }
     });
 
@@ -217,7 +238,7 @@ module.exports = function(db, app) {
       if(err) {
         console.log(err);
       } else {
-        res.send(data);
+        console.log("Deleted group from user")
       }
     })
   });
