@@ -18,6 +18,7 @@ export class ManageComponent implements OnInit {
   role = JSON.parse(localStorage.getItem('role'));
 
   inputUsername: any;
+  inputPassword: any;
   inputRole: any;
   inputEmail: any;
   inputGroup: any;
@@ -69,7 +70,7 @@ export class ManageComponent implements OnInit {
   }
 
   addUser(){
-    this.loginService.adduser(this.inputUsername, this.inputRole, this.inputEmail).subscribe(data => {
+    this.loginService.adduser(this.inputUsername, this.inputRole, this.inputEmail, this.inputPassword).subscribe(data => {
       if(data === false){
         alert("User already exists");
       } else if(data === true) {

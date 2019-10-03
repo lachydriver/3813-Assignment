@@ -23,7 +23,7 @@ module.exports = {
                 }
             });
 
-            socket.on("joinRoom",(room) => {
+            socket.on("joinRoom",(room, username) => {
                 console.log('user joined' + room)
                 if(room.includes(room)){
                     socket.join(room, ()=> {
@@ -50,19 +50,20 @@ module.exports = {
                                 socketRoomnum.push([room,1])
                             }
                         }
-                        chat.in(room).emit("notice", "A new user has joined");
+                        
                     });
+                    chat.in(room).emit("notice", username + " has joined");
                     return chat.in(room).emit("joined",room);
                 }
             });
 
-            socket.on("leaveRoom",(room)=> {
+            socket.on("leaveRoom",(room, username)=> {
                 console.log("Leave room called for " + room)
                 for (let i=0; i<socketRoom.length; i++){
                     if(socketRoom[i][0] == socket.id){
                         socketRoom.splice(i,1);
                         socket.leave(room);
-                        chat.to(room).emit("notice", "A user has left")
+                        
                     }
                 }
 
@@ -74,6 +75,7 @@ module.exports = {
                         }
                     }
                 }
+                chat.in(room).emit("notice", username + " has left")
             });
 
             socket.on("disconnect",()=> {

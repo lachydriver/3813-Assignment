@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   selectedGroupChannels: [];
   selectedChannel: String;
   messagecontent: String;
+  roomnotice: String;
   messages: string[] = [];
 
   checkRole(){
@@ -56,10 +57,10 @@ export class HomeComponent implements OnInit {
   }
 
   chosenChannel(channel){
-    this.socketService.leaveroom(this.selectedGroup,this.selectedChannel);
+    this.socketService.leaveroom(this.selectedGroup,this.selectedChannel, this.username);
     this.messages = [];
     this.selectedChannel = channel;
-    this.socketService.joinroom(this.selectedGroup,this.selectedChannel)
+    this.socketService.joinroom(this.selectedGroup,this.selectedChannel, this.username)
 
 
   }
@@ -77,7 +78,7 @@ export class HomeComponent implements OnInit {
     //initialise sockets
     this.socketService.initSocket();
     this.socketService.getMessage((m)=>{this.messages.push(m)});
-
+    this.socketService.notice((msg)=>{this.messages.push(msg)})
     this.checkRole();
     this.getUserInfo();
   }

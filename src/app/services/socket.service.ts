@@ -15,12 +15,12 @@ export class SocketService {
     this.socket = io(SERVER_URL);
   }
 
-  joinroom(selectedGroup,selectedChannel):void {
-    this.socket.emit("joinRoom",selectedGroup+selectedChannel);
+  joinroom(selectedGroup,selectedChannel,username: String):void {
+    this.socket.emit("joinRoom",selectedGroup+selectedChannel, username);
   }
 
-  leaveroom(selectedGroup,selectedChannel):void {
-    this.socket.emit("leaveRoom",selectedGroup+selectedChannel);
+  leaveroom(selectedGroup,selectedChannel,username: String):void {
+    this.socket.emit("leaveRoom",selectedGroup+selectedChannel, username);
   }
 
   sendMessage(message: String, username: String): void {
@@ -29,6 +29,14 @@ export class SocketService {
 
   getMessage(next){
     this.socket.on('message', (message)=>next(message));
+  }
+
+  notice(next){
+    this.socket.on('notice', res=>next(res))
+  }
+
+  joined(next){
+    this.socket.on('joined', res=>next(res))
   }
   
 }

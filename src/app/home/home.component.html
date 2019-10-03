@@ -22,10 +22,10 @@
         <p *ngFor="let message of messages">{{message}}</p>
     </div>
     <div class="newmessage">
-        <input class="text" placeholder="New Message" rows="5" [(ngModel)]="messagecontent" name="messagecontent"/>
+        <input class="textarea" placeholder="New Message" rows="5" [(ngModel)]="messagecontent" name="messagecontent"/>
         <a class="button is-info sendbutton" (click)="chat()">Send Message</a><br><br><br>
     </div>
-    {{messagecontent}}
+    
 </div>
 
 <div *ngIf="manageLoggedIn" class="managebutton">

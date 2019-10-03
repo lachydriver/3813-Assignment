@@ -6,7 +6,7 @@ module.exports = function(db, app) {
     }
 
     username = req.body.inputUsername;
-    password = req.body.inputPassword;
+    password = req.body.inputPassword;  
 
     user = {};
     user.valid = null;
@@ -80,19 +80,21 @@ module.exports = function(db, app) {
     });
   });
 
-  //FIX THIS ROUTE
+  //DONE
   app.post("/api/addchannel", function(req, res) {
     groupname = req.body.inputGroup;
     channelname = req.body.inputChannel;
 
     const collection = db.collection("groups");
 
-    collection.find({name: groupname, channels: { $elemMatch: { $gte: channelname }}})
+    collection.find({'name': groupname, 'channels': { $elemMatch:  { $in: [channelname] }}})
       .count((err, count) => {
         if (count == 0) {
-          console.log("channel not in group");
+          collection.findOneAndUpdate({'name': groupname}, {$push: {'channels': channelname}});
+          res.send(true);
         } else {
           console.log("Channel already in group");
+          res.send(false);
         }
       });
   });
@@ -182,6 +184,7 @@ module.exports = function(db, app) {
     })
   });
 
+  //DONE
   app.post("/api/addusertochannel", function(req, res) {
     username = req.body.inviteUsername;
     group = req.body.inviteGroup;
@@ -193,10 +196,10 @@ module.exports = function(db, app) {
       if(err) {
         console.log(err)
       } else if (count == 0) {
-        collection.findOneAndUpdate({username: username, 'groups.name': group}, {$push: {channels: channel}})
+        collection.findOneAndUpdate({username: username, 'groups.name': group}, {$push: {"groups.$.channels": channel}})
         res.send(true)
       } else {
-        console.log("channel found")
+        res.send(false)
       }
     })
   })
