@@ -24,29 +24,34 @@ export class HomeComponent implements OnInit {
   roomnotice: String;
   messages: string[] = [];
 
+  //Check the role of the currently logged in user, and display relevant links
   checkRole(){
     if(this.role === "super" || this.role === "groupadmin"){
       this.manageLoggedIn = true;
     }
   }
 
+  //get the current users group data and assign to variable
   getUserInfo(){
     this.loginService.getusergroups(this.username).subscribe(data => {
       this.groups = data;
     });
   }
 
+  //clear the local storage username and log the user out, and navigate them to the homepage
   logout(){
     localStorage.setItem('username', '');
     this.router.navigateByUrl("/");
   }
 
+  //change selected group and call the route to join the group through the socket service
   selectGroup(name){
     this.selectedGroup = name;
     console.log(this.selectedGroup)
     this.selectChannels();
   }
 
+  //Choose what channels the user can select based on what group they have chosen
   selectChannels(){
     for(var i = 0; i < this.groups.length; i++){
       if(this.selectedGroup === this.groups[i].name){
@@ -56,6 +61,7 @@ export class HomeComponent implements OnInit {
     console.log(this.selectedGroupChannels)
   }
 
+  //leave their old room when they click on another room, and join the new room through the socket service within angular
   chosenChannel(channel){
     this.socketService.leaveroom(this.selectedGroup,this.selectedChannel, this.username);
     this.messages = [];
@@ -65,6 +71,7 @@ export class HomeComponent implements OnInit {
 
   }
 
+  //send a message to the socket service to be broadcasted to call client
   chat() {
     if(this.messagecontent) {
       this.socketService.sendMessage(this.messagecontent, this.username);
