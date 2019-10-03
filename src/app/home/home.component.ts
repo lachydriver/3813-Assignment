@@ -56,6 +56,8 @@ export class HomeComponent implements OnInit {
   }
 
   chosenChannel(channel){
+    this.socketService.leaveroom(this.selectedGroup,this.selectedChannel);
+    this.messages = [];
     this.selectedChannel = channel;
     this.socketService.joinroom(this.selectedGroup,this.selectedChannel)
 
@@ -64,7 +66,7 @@ export class HomeComponent implements OnInit {
 
   chat() {
     if(this.messagecontent) {
-      this.socketService.sendMessage(this.messagecontent);
+      this.socketService.sendMessage(this.messagecontent, this.username);
       this.messagecontent = null;
     } else {
       console.log("No message");

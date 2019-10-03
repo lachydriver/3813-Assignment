@@ -13,24 +13,24 @@ module.exports = {
         const chat = io.of("/chat");
 
         chat.on('connection',(socket) => {
-            socket.on('message',(message)=> {
-                console.log("Message sent: " + message)
+            socket.on('message',(message, username)=> {
+                console.log("Message sent: " + message + " by " + username)
                 for(i=0; i<socketRoom.length;i++) {
                     if (socketRoom[i][0] == socket.id){
-                        chat.to(socketRoom[i][1]).emit('message', message);
+                        chat.to(socketRoom[i][1]).emit('message', username + ": " + message);
+                        console.log("Message sent to " + socketRoom[i]);
                     }
                 }
             });
 
             socket.on("joinRoom",(room) => {
-                console.log('user joined')
+                console.log('user joined' + room)
                 if(room.includes(room)){
                     socket.join(room, ()=> {
                         var inroomSocketarray = false;
-                        
                         for (i=0; i<socketRoom.length;i++) {
                             if(socketRoom[i][0] == socket.id){
-                                socketroom[i][0] = room;
+                                socketRoom[i][0] = room;
                                 inroom = true;
                             }
                         }
@@ -56,7 +56,8 @@ module.exports = {
                 }
             });
 
-            socket.on("leaveroom",(room)=> {
+            socket.on("leaveRoom",(room)=> {
+                console.log("Leave room called for " + room)
                 for (let i=0; i<socketRoom.length; i++){
                     if(socketRoom[i][0] == socket.id){
                         socketRoom.splice(i,1);

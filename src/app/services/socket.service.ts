@@ -23,8 +23,8 @@ export class SocketService {
     this.socket.emit("leaveRoom",selectedGroup+selectedChannel);
   }
 
-  sendMessage(message: String): void {
-    this.socket.emit('message', message);
+  sendMessage(message: String, username: String): void {
+    this.socket.emit('message', message, username);
   }
 
   getMessage(next){
